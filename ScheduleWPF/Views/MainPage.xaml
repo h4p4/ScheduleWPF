@@ -42,7 +42,7 @@
             </Grid>
             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Row="1">
                 <ScrollViewer  Width="Auto" CanContentScroll="False">
-                    <Grid>
+                    <Grid x:Name="LecturesGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -51,12 +51,15 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <DataGrid BorderBrush="LightGray" Grid.Column="0" ItemsSource="{Binding Lectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                  Name="MondayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
-                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
-                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
-                  VerticalGridLinesBrush="LightGray" Grid.Row="1" 
-                  >
+                        <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
+                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" 
+                                  BorderBrush="LightGray" Grid.Column="0" ItemsSource="{Binding MondayLectures, UpdateSourceTrigger=PropertyChanged}" 
+                                  IsReadOnly="True" Name="MondayLecturesDataGrid" AutoGenerateColumns="False" 
+                                  ColumnWidth="*" CanUserResizeColumns="False" CanUserResizeRows="False"
+                                  CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto" 
+                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" 
+                                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" 
+                                  Grid.Row="1">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Понедельник" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
@@ -71,12 +74,14 @@
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <DataGrid BorderBrush="LightGray" Grid.Column="1" ItemsSource="{Binding Lectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                  Name="TuesdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
-                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
-                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
-                  VerticalGridLinesBrush="LightGray" Grid.Row="1" 
-                  >
+                        <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
+                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" 
+                                  BorderBrush="LightGray" Grid.Column="1" ItemsSource="{Binding TuesdayLectures, UpdateSourceTrigger=PropertyChanged}" 
+                                  IsReadOnly="True" Name="TuesdayLecturesDataGrid" AutoGenerateColumns="False" 
+                                  ColumnWidth="*" CanUserResizeColumns="False" CanUserResizeRows="False" 
+                                  CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto" 
+                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" 
+                                  HorizontalGridLinesBrush="LightGray"  VerticalGridLinesBrush="LightGray" Grid.Row="1">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Вторник" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
@@ -91,12 +96,12 @@
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <DataGrid BorderBrush="LightGray" Grid.Column="2" ItemsSource="{Binding Lectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                  Name="WednesdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
-                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
-                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
-                  VerticalGridLinesBrush="LightGray" Grid.Row="1" 
-                  >
+                        <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
+                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="2" ItemsSource="{Binding WednesdayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
+                                  Name="WednesdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
+                                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
+                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
+                                  VerticalGridLinesBrush="LightGray" Grid.Row="1">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Среда" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
@@ -111,12 +116,12 @@
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <DataGrid BorderBrush="LightGray" Grid.Column="3" ItemsSource="{Binding Lectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                  Name="ThursdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
-                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
-                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
-                  VerticalGridLinesBrush="LightGray" Grid.Row="1" 
-                  >
+                        <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}"  
+                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="3" ItemsSource="{Binding ThursdayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
+                                  Name="ThursdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
+                                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
+                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
+                                  VerticalGridLinesBrush="LightGray" Grid.Row="1">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Четверг" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
@@ -131,12 +136,12 @@
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <DataGrid BorderBrush="LightGray" Grid.Column="4" ItemsSource="{Binding Lectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                  Name="FridayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
-                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
-                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
-                  VerticalGridLinesBrush="LightGray" Grid.Row="1" 
-                  >
+                        <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
+                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="4" ItemsSource="{Binding FridayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
+                                  Name="FridayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
+                                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
+                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
+                                  VerticalGridLinesBrush="LightGray" Grid.Row="1">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Пятница" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
@@ -151,12 +156,12 @@
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <DataGrid BorderBrush="LightGray" Grid.Column="5" ItemsSource="{Binding Lectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                  Name="SaturdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
-                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
-                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
-                  VerticalGridLinesBrush="LightGray" Grid.Row="1" 
-                  >
+                        <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
+                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="5" ItemsSource="{Binding SaturdayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
+                                  Name="SaturdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
+                                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
+                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
+                                  VerticalGridLinesBrush="LightGray" Grid.Row="1">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Суббота" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>

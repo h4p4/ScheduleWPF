@@ -14,5 +14,9 @@ namespace ScheduleWPF
         {
             return context;
         }
+        public static void SaveChanges()
+        {
+            context.SaveChanges();
+        }
     }
 }
