@@ -9,6 +9,7 @@ namespace ScheduleWPF
 {
     public static class Helper
     {
+
         private static ScheduleContext context = new ScheduleContext();
         public static ScheduleContext GetContext()
         {

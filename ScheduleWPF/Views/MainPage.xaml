@@ -10,8 +10,8 @@
     <Border BorderBrush="DarkGray" BorderThickness="1" Padding="10">
         <Grid Background="White">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Name="LecturesColumnDefinition" Width="1.29*"/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition MinHeight="70" Height="Auto"/>
@@ -21,8 +21,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition MinWidth="150" Width="Auto"/>
-                    <ColumnDefinition MinWidth="150" Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <ComboBox Padding="8 0" Grid.Column="0" Margin="0 10 20 10"                       
                           HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
@@ -33,15 +33,26 @@
                           ItemsSource="{Binding DoubleDates}" SelectedItem="{Binding SelectedDoubleDate, UpdateSourceTrigger=PropertyChanged}"
                           DisplayMemberPath="View" SelectedValuePath="View" 
                           Name="DatesCBox"/>
-                <ComboBox Padding="8 0" Grid.Column="2" Margin="10 10 0 10"                           
+                <ComboBox Padding="8 0" Grid.Column="3" HorizontalAlignment="Right" Margin="10 10 0 10"                           
                           HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                           ItemsSource="{Binding AllGroups}" SelectedItem="{Binding SelectedGroup, UpdateSourceTrigger=PropertyChanged}" 
-                          DisplayMemberPath="Title" SelectedValuePath="Title"
-                          Name="GroupsCBox"/>
+                          SelectedValuePath="Title"
+                          Name="GroupsCBox">
+                    <ComboBox.Style>
+                        <Style TargetType="ComboBox" >
+                            <Setter Property="Popup.FlowDirection" Value="RightToLeft"/>
+                        </Style>
+                    </ComboBox.Style>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <!--<ComboBox Padding="2" Grid.Column="3" Margin="20 10 0 10" MinWidth="120" ItemsSource="{Binding GroupsCollection}"/>-->
             </Grid>
             <Border BorderBrush="LightGray" BorderThickness="1" Grid.Row="1">
-                <ScrollViewer  Width="Auto" CanContentScroll="False">
+                <ScrollViewer CanContentScroll="False" HorizontalScrollBarVisibility="Auto">
                     <Grid x:Name="LecturesGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -179,19 +190,9 @@
                     </Grid>
                 </ScrollViewer>
             </Border>
+            <Grid Grid.Column="1" Grid.Row="1" Background="Transparent">
+                <Frame Visibility="Visible" Name="EditAddFrame" NavigationUIVisibility="Hidden"/>
+            </Grid>
         </Grid>
     </Border>
 </Page>
-<!--<DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat={}{0:dd.MM.yyyy}}" MinWidth="120" Width="Auto"/>
-<DataGridTextColumn Header="Дисциплина" Binding="{Binding Subject.Title}" MinWidth="250" Width="Auto"/>
-<DataGridTextColumn Header="Время" MinWidth="150" Width="Auto">
-    <DataGridTextColumn.Binding>
-        <MultiBinding StringFormat="{} {0:HH:mm} - {1:HH:mm}">
-            <Binding Path="Time.StartTime"/>
-            <Binding Path="Time.EndTime"/>
-        </MultiBinding>
-    </DataGridTextColumn.Binding>
-</DataGridTextColumn>
-<DataGridTextColumn Header="Группа" Binding="{Binding Group.Title}" MinWidth="100" Width="Auto"/>
-<DataGridTextColumn Header="Аудитория" Binding="{Binding Room.Title}" MinWidth="150" Width="Auto"/>
-<DataGridTextColumn Header="Преподаватель" Binding="{Binding Lecturer.FormattedFullName}"/>-->

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
+using ScheduleWPF.Models;
 using ScheduleWPF.ViewModels;
 
 namespace ScheduleWPF.Views
@@ -33,6 +34,8 @@ namespace ScheduleWPF.Views
 
         private void LecturesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var selectedLecture = (DataGrid)sender;
+            EditAddFrame.Content = new MainPageEditAddSubPage((Lecture)selectedLecture.SelectedItem);
         }
     }
 }

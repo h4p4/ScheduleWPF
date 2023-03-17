@@ -27,7 +27,6 @@ public partial class Lecturer
     {
         get 
         {
-
             var fullName =
                 this.MiddleName == null ?
                 this.Surname + " " + StringDotFormat(this.FirstName) : 

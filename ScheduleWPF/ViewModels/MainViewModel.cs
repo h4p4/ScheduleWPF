@@ -68,7 +68,7 @@ namespace ScheduleWPF.ViewModels
         public Lecture SelectedLecture
         {
             get { return _selectedLecture; }
-            set { SetProperty(ref _selectedLecture, value); Handle(); }
+            set { SetProperty(ref _selectedLecture, value); /*Handle();*/ }
         }
         public string SelectedYear
         {
@@ -119,7 +119,7 @@ namespace ScheduleWPF.ViewModels
         private void InitGroups()
         {
             _allGroups = new ObservableCollection<Group>(Helper.GetContext().Groups);
-            _allGroups.Insert(0, new Group { Title = "--Выберите группу--", Id = -1 });
+            _allGroups.Insert(0, new Group { Title = "Выберите группу", Id = -1 });
             _selectedGroup = AllGroups.First();
         }
         private void InitLecturesPool()
