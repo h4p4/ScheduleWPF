@@ -10,37 +10,55 @@
       FontFamily="Times new Roman"
       FontSize="24"
       >
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Сокращённый день"/>
-            <CheckBox Name="IsShortDayChBox" IsChecked="{Binding IsShortDay, UpdateSourceTrigger=PropertyChanged}" Click="IsShortDayChBox_Click"/>
-        </StackPanel>
-        <ComboBox ItemsSource="{Binding SubjectList}" 
+    <Grid>
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type ComboBox}">
+                    <Setter Property="Margin" Value="0 0 0 10"/>
+                    <Setter Property="Padding" Value="5"/>
+                </Style>
+            </StackPanel.Resources>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Сокращённый день?"/>
+                <CheckBox Name="IsShortDayChBox" VerticalAlignment="Center"
+                          IsChecked="{Binding IsShortDay, UpdateSourceTrigger=PropertyChanged}"
+                          Click="IsShortDayChBox_Click"/>
+            </StackPanel>
+            <TextBlock Text="Предмет:"/>
+            <ComboBox ItemsSource="{Binding SubjectList}" 
                   SelectedItem="{Binding Lecture.Subject, UpdateSourceTrigger=PropertyChanged}" 
-                  SelectedValuePath="Title">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Title}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox ItemsSource="{Binding RoomList}" 
-                  SelectedItem="{Binding Lecture.Room, UpdateSourceTrigger=PropertyChanged}" 
-                  SelectedValuePath="Title">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Title}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox ItemsSource="{Binding TimeList}" 
+                  SelectedValuePath="Id">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="Кабинет:"/>
+            <ComboBox ItemsSource="{Binding RoomList}" 
+                      SelectedItem="{Binding Lecture.Room, UpdateSourceTrigger=PropertyChanged}" 
+                      DisplayMemberPath="Title" SelectedValuePath="Id">
+            </ComboBox>
+            <TextBlock Text="Время:"/>
+            <ComboBox ItemsSource="{Binding TimeList}" 
                   SelectedItem="{Binding Lecture.Time, UpdateSourceTrigger=PropertyChanged}" 
-                  SelectedValuePath="FormattedDoubleTime" Name="TimeCBox">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding FormattedDoubleTime}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-    </StackPanel>
+                  SelectedValuePath="Id" Name="TimeCBox">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FormattedDoubleTime}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="Преподаватель:"/>
+            <ComboBox ItemsSource="{Binding LecturerList}" 
+                  SelectedItem="{Binding Lecture.Lecturer, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedValuePath="Id" Name="LecturerCBox">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FormattedFullName}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+    </Grid>
 </Page>

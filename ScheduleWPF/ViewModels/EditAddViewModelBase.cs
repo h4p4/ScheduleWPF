@@ -25,6 +25,8 @@ namespace ScheduleWPF.ViewModels
         [ObservableProperty]
         private ObservableCollection<Room> _roomList;
         [ObservableProperty]
+        private ObservableCollection<Lecturer> _lecturerList;
+        [ObservableProperty]
         private Lecture? _lecture;
         [ObservableProperty]
         private string? _description;
@@ -60,14 +62,14 @@ namespace ScheduleWPF.ViewModels
         }
         public EditAddViewModelBase()
         {
+            _date = DateOnly.FromDateTime(DateTime.Now);
             _roomList = new ObservableCollection<Room>(Helper.GetContext().Rooms);
             _subjectList = new ObservableCollection<Subject>(Helper.GetContext().Subjects);
-            _date = DateOnly.FromDateTime(DateTime.Now);
             _allTimeList = new ObservableCollection<Time>(Helper.GetContext().Times);
+            _lecturerList = new ObservableCollection<Lecturer>(Helper.GetContext().Lecturers);
         }
         private void Handle()
         {
-
             TimeList = new (IsShortDay ? _allTimeList.Where(x => x.DiffInMinutes == ShortLectureInMunutes) : 
                                           _allTimeList.Where(x => x.DiffInMinutes == FullLectureInMunutes));
         }

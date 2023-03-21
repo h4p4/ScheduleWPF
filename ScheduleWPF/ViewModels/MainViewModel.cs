@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -25,7 +26,8 @@ namespace ScheduleWPF.ViewModels
         private ObservableCollection<Lecture> _allLectures;
         private ObservableCollection<DoubleDate> _doubleDates;
 
-
+        [ObservableProperty]
+        private bool _canAdd = false;
         [ObservableProperty]
         private ObservableCollection<Lecture> _mondayLectures;
         [ObservableProperty]
@@ -58,7 +60,12 @@ namespace ScheduleWPF.ViewModels
         public Group SelectedGroup
         {
             get { return _selectedGroup; }
-            set { SetProperty(ref _selectedGroup, value); Handle(); }
+            set 
+            { 
+                SetProperty(ref _selectedGroup, value); 
+                Handle();
+                CanAdd = _selectedGroup.Id != -1;
+            }
         }
         public DoubleDate SelectedDoubleDate
         {
@@ -75,6 +82,7 @@ namespace ScheduleWPF.ViewModels
             get { return _selectedYear; }
             set { SetProperty(ref _selectedYear, value); Handle(); }
         }
+        
 
         public MainViewModel()
         {
@@ -82,6 +90,7 @@ namespace ScheduleWPF.ViewModels
         }
         private void InitializeData()
         {
+            CanAdd = false;
             InitLectures();
             InitYears(); //years cbox
             InitDates(); //dates cbox
@@ -152,12 +161,11 @@ namespace ScheduleWPF.ViewModels
         private void Handle()
         {
             ClearLectures();
-            if (_selectedGroup.Id != -1)
-                UpdateLectures();
+            if (_selectedGroup.Id == -1) return;
+            UpdateLectures();
         }
         private void UpdateLectures()
         {
-
             for (int i = 0; i < 6; i++)
                 foreach (var l in (_allLectures.Where(x => (x.Group.Id == _selectedGroup.Id) && x.Date == SelectedDoubleDate.FirstDate.AddDays(i))))
                     Lectures.ElementAt(i).Add(l);

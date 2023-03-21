@@ -29,12 +29,12 @@ public partial class Lecturer
         {
             var fullName =
                 this.MiddleName == null ?
-                this.Surname + " " + StringDotFormat(this.FirstName) : 
-                this.Surname + " " + StringDotFormat(this.FirstName) + StringDotFormat(this.MiddleName);
+                this.Surname + " " + StringShortNameFormat(this.FirstName) : 
+                this.Surname + " " + StringShortNameFormat(this.FirstName) + StringShortNameFormat(this.MiddleName);
             return fullName;
         }
     }
-    private string StringDotFormat(string name)
+    private string StringShortNameFormat(string name)
     {
         return name.Substring(0, 1) + ". ";
     }

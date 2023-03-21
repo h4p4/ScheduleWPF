@@ -23,7 +23,7 @@ namespace ScheduleWPF.Views
     /// </summary>
     public partial class MainPage : Page
     {
-        private List<DataGrid> weekDataGrids;
+        //private List<DataGrid> weekDataGrids;
         private MainPageEditAddSubPage _editAddSubPage;
         private MainPageEditAddSubPage? EditAddSubPage
         {
@@ -38,18 +38,30 @@ namespace ScheduleWPF.Views
             InitializeComponent();
             Helper.GetContext().Lectures.Load();
             this.DataContext = new MainViewModel();
-            weekDataGrids = new List<DataGrid>(LecturesGrid.Children.OfType<DataGrid>().Where(n => n.Name.EndsWith("LecturesDataGrid")));
+            ChangeAddButtonsVisibility(((MainViewModel)this.DataContext).CanAdd);
+            //weekDataGrids = new List<DataGrid>(LecturesGrid.Children.OfType<DataGrid>().Where(n => n.Name.EndsWith("LecturesDataGrid")));
         }
 
         private void LecturesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedLecture = (DataGrid)sender;
-            EditAddSubPage = new MainPageEditAddSubPage((Lecture)selectedLecture.SelectedItem);
+            EditAddSubPage = new MainPageEditAddSubPage((Lecture)((DataGrid)sender).SelectedItem);
         }
 
         private void AnyCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EditAddSubPage = null;
+            if (GroupsCBox.Name != ((ComboBox)sender).Name) return;
+            ChangeAddButtonsVisibility(((MainViewModel)this.DataContext).CanAdd);
+
+        }
+        private void ChangeAddButtonsVisibility(bool isVisible)
+        {
+            if (isVisible)
+            {
+                AddBtnsStackPanel.Visibility = Visibility.Visible;
+                return;
+            }
+            AddBtnsStackPanel.Visibility = Visibility.Hidden;
         }
     }
 }
