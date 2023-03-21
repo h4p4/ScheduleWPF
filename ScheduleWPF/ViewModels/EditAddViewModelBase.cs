@@ -18,12 +18,12 @@ namespace ScheduleWPF.ViewModels
         private bool _isShortDay;
         private Time _defaultTime = new Time();
         private ObservableCollection<Time> _allTimeList;
-
         [ObservableProperty]
         private ObservableCollection<Time> _timeList;
-
         [ObservableProperty]
         private ObservableCollection<Subject> _subjectList;
+        [ObservableProperty]
+        private ObservableCollection<Room> _roomList;
         [ObservableProperty]
         private Lecture? _lecture;
         [ObservableProperty]
@@ -37,7 +37,6 @@ namespace ScheduleWPF.ViewModels
             set 
             {
                 SetProperty(ref _time, value);
-                //if (!TimeList.Where(x => x.Id == null).Any()) return;
                 if (Time.Id == null)
                     TimeList.RemoveAt(0);
             }
@@ -61,6 +60,7 @@ namespace ScheduleWPF.ViewModels
         }
         public EditAddViewModelBase()
         {
+            _roomList = new ObservableCollection<Room>(Helper.GetContext().Rooms);
             _subjectList = new ObservableCollection<Subject>(Helper.GetContext().Subjects);
             _date = DateOnly.FromDateTime(DateTime.Now);
             _allTimeList = new ObservableCollection<Time>(Helper.GetContext().Times);
@@ -70,10 +70,6 @@ namespace ScheduleWPF.ViewModels
 
             TimeList = new (IsShortDay ? _allTimeList.Where(x => x.DiffInMinutes == ShortLectureInMunutes) : 
                                           _allTimeList.Where(x => x.DiffInMinutes == FullLectureInMunutes));
-            //if (Time == null) return;
-            //if (IsShortDay && _time.DiffInMinutes == FullLectureInMunutes) _timeList.Insert(0, _time);
-            //if (!IsShortDay && _time.DiffInMinutes == ShortLectureInMunutes) _timeList.Insert(0, _time);
-
         }
     }
 }

@@ -22,11 +22,9 @@ namespace ScheduleWPF.Views
     /// </summary>
     public partial class MainPageEditAddSubPage : Page
     {
-        private Lecture? _lecture;
         public MainPageEditAddSubPage(Lecture lecture)
         {
             InitializeComponent();
-            _lecture = lecture;
             this.DataContext = new EditViewModel(lecture);
         }
         public MainPageEditAddSubPage()
