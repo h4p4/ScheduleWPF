@@ -73,7 +73,8 @@ public partial class ScheduleContext : DbContext
             entity.HasOne(d => d.Time).WithMany(p => p.Lectures)
                 .HasForeignKey(d => d.TimeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Lecture_TimeId_fkey");
+                .HasConstraintName("Lecture_TimeId_fkey")
+                .IsRequired(false);
         });
 
         modelBuilder.Entity<Lecturer>(entity =>

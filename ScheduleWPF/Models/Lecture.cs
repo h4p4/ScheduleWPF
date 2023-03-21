@@ -11,7 +11,7 @@ public partial class Lecture
 
     public DateOnly Date { get; set; }
 
-    public int TimeId { get; set; }
+    public int? TimeId { get; set; }
 
     public int RoomId { get; set; }
 
@@ -29,5 +29,5 @@ public partial class Lecture
 
     public virtual Subject Subject { get; set; } = null!;
 
-    public virtual Time Time { get; set; } = null!;
+    public virtual Time? Time { get; set; }
 }

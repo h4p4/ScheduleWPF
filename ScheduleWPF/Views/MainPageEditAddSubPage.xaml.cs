@@ -22,7 +22,7 @@ namespace ScheduleWPF.Views
     /// </summary>
     public partial class MainPageEditAddSubPage : Page
     {
-        private Lecture _lecture;
+        private Lecture? _lecture;
         public MainPageEditAddSubPage(Lecture lecture)
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace ScheduleWPF.Views
 
         private void IsShortDayChBox_Click(object sender, RoutedEventArgs e)
         {
-
+            TimeCBox.SelectedIndex = 0;
         }
     }
 }

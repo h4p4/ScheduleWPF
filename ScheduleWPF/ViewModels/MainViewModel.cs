@@ -76,7 +76,6 @@ namespace ScheduleWPF.ViewModels
             set { SetProperty(ref _selectedYear, value); Handle(); }
         }
 
-
         public MainViewModel()
         {
             InitializeData();
@@ -158,13 +157,10 @@ namespace ScheduleWPF.ViewModels
         }
         private void UpdateLectures()
         {
-            var fd = SelectedDoubleDate.FirstDate;
+
             for (int i = 0; i < 6; i++)
-            {
-                foreach (var l in (_allLectures.Where(x => (x.Group.Id == _selectedGroup.Id) && x.Date == fd)))
+                foreach (var l in (_allLectures.Where(x => (x.Group.Id == _selectedGroup.Id) && x.Date == SelectedDoubleDate.FirstDate.AddDays(i))))
                     Lectures.ElementAt(i).Add(l);
-                fd = fd.AddDays(1);
-            }
         }
         private void ClearLectures()
         {

@@ -27,17 +27,17 @@
                 <ComboBox Padding="8 0" Grid.Column="0" Margin="0 10 20 10"                       
                           HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                           ItemsSource="{Binding AllYears}" SelectedValue="{Binding SelectedYear}"
-                          Name="YearsCBox"/>
+                          Name="YearsCBox" SelectionChanged="AnyCBox_SelectionChanged"/>
                 <ComboBox Padding="8 0" Grid.Column="1" Margin="0 10 10 10" 
                           HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                           ItemsSource="{Binding DoubleDates}" SelectedItem="{Binding SelectedDoubleDate, UpdateSourceTrigger=PropertyChanged}"
                           DisplayMemberPath="View" SelectedValuePath="View" 
-                          Name="DatesCBox"/>
+                          Name="DatesCBox" SelectionChanged="AnyCBox_SelectionChanged"/>
                 <ComboBox Padding="8 0" Grid.Column="3" HorizontalAlignment="Right" Margin="10 10 0 10"                           
                           HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                           ItemsSource="{Binding AllGroups}" SelectedItem="{Binding SelectedGroup, UpdateSourceTrigger=PropertyChanged}" 
                           SelectedValuePath="Title"
-                          Name="GroupsCBox">
+                          Name="GroupsCBox" SelectionChanged="AnyCBox_SelectionChanged">
                     <ComboBox.Style>
                         <Style TargetType="ComboBox" >
                             <Setter Property="Popup.FlowDirection" Value="RightToLeft"/>
@@ -74,9 +74,8 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Понедельник" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
-                                        <MultiBinding StringFormat="{} {2} &#x0a; {4} &#x0a; {0:HH:mm} - {1:HH:mm} &#x0a; {3}">
-                                            <Binding Path="Time.StartTime"/>
-                                            <Binding Path="Time.EndTime"/>
+                                        <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
+                                            <Binding Path="Time.FormattedDoubleTime"/>
                                             <Binding Path="Subject.Title"/>
                                             <Binding Path="Room.Title"/>
                                             <Binding Path="Lecturer.FormattedFullName"/>
@@ -96,9 +95,8 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Вторник" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
-                                        <MultiBinding StringFormat="{} {2} &#x0a; {4} &#x0a; {0:HH:mm} - {1:HH:mm} &#x0a; {3}">
-                                            <Binding Path="Time.StartTime"/>
-                                            <Binding Path="Time.EndTime"/>
+                                        <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
+                                            <Binding Path="Time.FormattedDoubleTime"/>
                                             <Binding Path="Subject.Title"/>
                                             <Binding Path="Room.Title"/>
                                             <Binding Path="Lecturer.FormattedFullName"/>
@@ -116,9 +114,8 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Среда" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
-                                        <MultiBinding StringFormat="{} {2} &#x0a; {4} &#x0a; {0:HH:mm} - {1:HH:mm} &#x0a; {3}">
-                                            <Binding Path="Time.StartTime"/>
-                                            <Binding Path="Time.EndTime"/>
+                                        <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
+                                            <Binding Path="Time.FormattedDoubleTime"/>
                                             <Binding Path="Subject.Title"/>
                                             <Binding Path="Room.Title"/>
                                             <Binding Path="Lecturer.FormattedFullName"/>
@@ -136,9 +133,8 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Четверг" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
-                                        <MultiBinding StringFormat="{} {2} &#x0a; {4} &#x0a; {0:HH:mm} - {1:HH:mm} &#x0a; {3}">
-                                            <Binding Path="Time.StartTime"/>
-                                            <Binding Path="Time.EndTime"/>
+                                        <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
+                                            <Binding Path="Time.FormattedDoubleTime"/>
                                             <Binding Path="Subject.Title"/>
                                             <Binding Path="Room.Title"/>
                                             <Binding Path="Lecturer.FormattedFullName"/>
@@ -156,9 +152,8 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Пятница" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
-                                        <MultiBinding StringFormat="{} {2} &#x0a; {4} &#x0a; {0:HH:mm} - {1:HH:mm} &#x0a; {3}">
-                                            <Binding Path="Time.StartTime"/>
-                                            <Binding Path="Time.EndTime"/>
+                                        <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
+                                            <Binding Path="Time.FormattedDoubleTime"/>
                                             <Binding Path="Subject.Title"/>
                                             <Binding Path="Room.Title"/>
                                             <Binding Path="Lecturer.FormattedFullName"/>
@@ -176,9 +171,8 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Суббота" MinWidth="150" Width="Auto">
                                     <DataGridTextColumn.Binding>
-                                        <MultiBinding StringFormat="{} {2} &#x0a; {4} &#x0a; {0:HH:mm} - {1:HH:mm} &#x0a; {3}">
-                                            <Binding Path="Time.StartTime"/>
-                                            <Binding Path="Time.EndTime"/>
+                                        <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
+                                            <Binding Path="Time.FormattedDoubleTime"/>
                                             <Binding Path="Subject.Title"/>
                                             <Binding Path="Room.Title"/>
                                             <Binding Path="Lecturer.FormattedFullName"/>

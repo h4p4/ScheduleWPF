@@ -8,8 +8,8 @@ namespace ScheduleWPF.Utilities
 {
     public class DoubleDate
     {
-        public  DateOnly FirstDate { get; private set; }
-        public  DateOnly LastDate { get; private set; }
+        public DateOnly FirstDate { get; private set; }
+        public DateOnly LastDate { get; private set; }
         public DoubleDate(DateOnly firstDate)
         {
             FirstDate = firstDate;

@@ -13,22 +13,22 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Сокращённый день"/>
-            <CheckBox Name="IsShortDayChBox" IsChecked="{Binding IsShortDay}" Click="IsShortDayChBox_Click"/>
+            <CheckBox Name="IsShortDayChBox" IsChecked="{Binding IsShortDay, UpdateSourceTrigger=PropertyChanged}" Click="IsShortDayChBox_Click"/>
         </StackPanel>
         <ComboBox ItemsSource="{Binding SubjectList}" 
                   SelectedItem="{Binding Lecture.Subject, UpdateSourceTrigger=PropertyChanged}" 
                   SelectedValuePath="Title">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBox Text="{Binding Title}"/>
+                    <TextBlock Text="{Binding Title}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBox Text="{Binding Lecture.Group.Title}"></TextBox>
         <TextBox Text="{Binding Lecture.Room.Title}"></TextBox>
-        <ComboBox ItemsSource="{Binding TimeList}" 
+        <ComboBox ItemsSource="{Binding TimeList, UpdateSourceTrigger=PropertyChanged}" 
                   SelectedItem="{Binding Lecture.Time, UpdateSourceTrigger=PropertyChanged}" 
-                  SelectedValuePath="FormattedDoubleTime">
+                  SelectedValuePath="FormattedDoubleTime" Name="TimeCBox">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding FormattedDoubleTime}"/>

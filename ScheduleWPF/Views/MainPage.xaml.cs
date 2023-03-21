@@ -24,6 +24,15 @@ namespace ScheduleWPF.Views
     public partial class MainPage : Page
     {
         private List<DataGrid> weekDataGrids;
+        private MainPageEditAddSubPage _editAddSubPage;
+        private MainPageEditAddSubPage? EditAddSubPage
+        {
+            set
+            {
+                _editAddSubPage = value;
+                EditAddFrame.Content = _editAddSubPage;
+            }
+        }
         public MainPage()
         {
             InitializeComponent();
@@ -35,7 +44,12 @@ namespace ScheduleWPF.Views
         private void LecturesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedLecture = (DataGrid)sender;
-            EditAddFrame.Content = new MainPageEditAddSubPage((Lecture)selectedLecture.SelectedItem);
+            EditAddSubPage = new MainPageEditAddSubPage((Lecture)selectedLecture.SelectedItem);
+        }
+
+        private void AnyCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EditAddSubPage = null;
         }
     }
 }
