@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ScheduleWPF.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace ScheduleWPF.ViewModels
         private const int FullLectureInMunutes = 95;
         private const int ShortLectureInMunutes = 60;
 
+        private Time? _time;
         private bool _isShortDay;
         private Time _defaultTime = new Time();
         private ObservableCollection<Time> _allTimeList;
@@ -32,7 +34,6 @@ namespace ScheduleWPF.ViewModels
         private string? _description;
         [ObservableProperty]
         private DateOnly _date;
-        private Time? _time;
         public Time? Time
         {
             get { return _time; }
@@ -43,6 +44,8 @@ namespace ScheduleWPF.ViewModels
                     TimeList.RemoveAt(0);
             }
         }
+
+        //public bool CanDispose { get; set; } = false;
 
         public bool IsShortDay
         {
@@ -55,6 +58,7 @@ namespace ScheduleWPF.ViewModels
                 _time = _defaultTime;
             }
         }
+
         public void IsShortDaySetWithoutUpdate(bool value)
         {
             SetProperty(ref _isShortDay, value);
@@ -67,11 +71,30 @@ namespace ScheduleWPF.ViewModels
             _subjectList = new ObservableCollection<Subject>(Helper.GetContext().Subjects);
             _allTimeList = new ObservableCollection<Time>(Helper.GetContext().Times);
             _lecturerList = new ObservableCollection<Lecturer>(Helper.GetContext().Lecturers);
+            Handle();
         }
         private void Handle()
         {
             TimeList = new (IsShortDay ? _allTimeList.Where(x => x.DiffInMinutes == ShortLectureInMunutes) : 
                                           _allTimeList.Where(x => x.DiffInMinutes == FullLectureInMunutes));
+        }
+        [RelayCommand]
+        protected virtual void SaveChanges()
+        {
+            try
+            {
+                Helper.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
+        }
+        [RelayCommand]
+        protected virtual void CancelChanges()
+        {
+            Helper.DeleteChanges(Lecture);
         }
     }
 }

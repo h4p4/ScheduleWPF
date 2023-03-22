@@ -78,6 +78,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
+                                              SelectedValuePath="Id"
                                   SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" 
                                   BorderBrush="LightGray" Grid.Column="0" ItemsSource="{Binding MondayLectures, UpdateSourceTrigger=PropertyChanged}" 
                                   IsReadOnly="True" Name="MondayLecturesDataGrid" AutoGenerateColumns="False" 
@@ -100,6 +101,7 @@
                                         </DataGrid.Columns>
                                     </DataGrid>
                                     <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
+                                              SelectedValuePath="Id"
                                   SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" 
                                   BorderBrush="LightGray" Grid.Column="1" ItemsSource="{Binding TuesdayLectures, UpdateSourceTrigger=PropertyChanged}" 
                                   IsReadOnly="True" Name="TuesdayLecturesDataGrid" AutoGenerateColumns="False" 
@@ -121,6 +123,7 @@
                                         </DataGrid.Columns>
                                     </DataGrid>
                                     <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
+                                              SelectedValuePath="Id"
                                   SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="2" ItemsSource="{Binding WednesdayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
                                   Name="WednesdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
                                   CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
@@ -140,6 +143,7 @@
                                         </DataGrid.Columns>
                                     </DataGrid>
                                     <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}"  
+                                              SelectedValuePath="Id"
                                   SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="3" ItemsSource="{Binding ThursdayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
                                   Name="ThursdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
                                   CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
@@ -159,6 +163,7 @@
                                         </DataGrid.Columns>
                                     </DataGrid>
                                     <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
+                                              SelectedValuePath="Id"
                                   SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="4" ItemsSource="{Binding FridayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
                                   Name="FridayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
                                   CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
@@ -178,6 +183,7 @@
                                         </DataGrid.Columns>
                                     </DataGrid>
                                     <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
+                                              SelectedValuePath="Id"
                                   SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="5" ItemsSource="{Binding SaturdayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
                                   Name="SaturdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
                                   CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
@@ -208,27 +214,27 @@
                             <Button Name="MondayAddLectureBtn" Content="➕" Grid.Column="0" 
                                     Width="{Binding ElementName=MondayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=MondayAddLectureBtn, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
-                                    />
+                                    Click="AddLectureBtn_Click"/>
                             <Button Name="TuesdayAddLectureBtn" Content="➕" Grid.Column="1" 
                                     Width="{Binding ElementName=TuesdayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=TuesdayLecturesDataGrid, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
-                                    />
+                                    Click="AddLectureBtn_Click"/>
                             <Button Name="WednesdayAddLectureBtn" Content="➕" Grid.Column="2" 
                                     Width="{Binding ElementName=WednesdayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=WednesdayLecturesDataGrid, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
-                                    />
+                                    Click="AddLectureBtn_Click"/>
                             <Button Name="ThursdayAddLectureBtn" Content="➕" Grid.Column="3" 
                                     Width="{Binding ElementName=ThursdayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=ThursdayLecturesDataGrid, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
-                                    />
+                                    Click="AddLectureBtn_Click"/>
                             <Button Name="FridayAddLectureBtn" Content="➕" Grid.Column="4" 
                                     Width="{Binding ElementName=FridayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=FridayLecturesDataGrid, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
-                                    />
+                                    Click="AddLectureBtn_Click"/>
                             <Button Name="SaturdayAddLectureBtn" Content="➕" Grid.Column="5" 
                                     Width="{Binding ElementName=SaturdayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=SaturdayLecturesDataGrid, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
-                                    />
+                                    Click="AddLectureBtn_Click"/>
                         </StackPanel>
                         <Grid Grid.Column="1" Background="Transparent" Margin="15 0" HorizontalAlignment="Right">
                             <Frame Visibility="Visible" Name="EditAddFrame" NavigationUIVisibility="Hidden"/>

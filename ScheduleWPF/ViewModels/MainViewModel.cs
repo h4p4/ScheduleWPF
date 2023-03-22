@@ -23,11 +23,12 @@ namespace ScheduleWPF.ViewModels
         private Lecture _selectedLecture;
 
         private ObservableCollection<string> _allYears;
-        private ObservableCollection<Lecture> _allLectures;
         private ObservableCollection<DoubleDate> _doubleDates;
 
         [ObservableProperty]
         private bool _canAdd = false;
+        [ObservableProperty]
+        public ObservableCollection<ObservableCollection<Lecture>> _lectures;
         [ObservableProperty]
         private ObservableCollection<Lecture> _mondayLectures;
         [ObservableProperty]
@@ -46,6 +47,13 @@ namespace ScheduleWPF.ViewModels
         private ObservableCollection<DateOnly> _allDates;
 
 
+        public ObservableCollection<Lecture> _allLectures;
+        public ObservableCollection<Lecture> AllLectures
+        {
+            get => _allLectures;
+            set { _allLectures = value; SetProperty(ref _allLectures, value); Handle(); }
+        }
+
         public ObservableCollection<DoubleDate> DoubleDates
         {
             get { return _doubleDates; }
@@ -56,7 +64,7 @@ namespace ScheduleWPF.ViewModels
             get { return _allYears; }
             set { _allYears = value; SetProperty(ref _allYears, value); }
         }
-        public ObservableCollection<ObservableCollection<Lecture>> Lectures { get; set; }
+
         public Group SelectedGroup
         {
             get { return _selectedGroup; }
@@ -139,6 +147,7 @@ namespace ScheduleWPF.ViewModels
                                       .Include(x => x.Room)
                                       .Include(x => x.Time)
                                       .Include(x => x.Lecturer)
+                                      .OrderBy(x => x.Time.StartTime.ToTimeSpan().TotalSeconds)
                                 );
         }
         private void InitLectures()
@@ -174,6 +183,11 @@ namespace ScheduleWPF.ViewModels
         {
             foreach (var l in Lectures)
                 l.Clear();
+        }
+        public void UpdateView()
+        {
+            InitLecturesPool();
+            Handle();
         }
     }
 }

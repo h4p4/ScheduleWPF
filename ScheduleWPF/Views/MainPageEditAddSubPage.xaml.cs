@@ -1,7 +1,9 @@
-﻿using ScheduleWPF.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using ScheduleWPF.Models;
 using ScheduleWPF.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,20 +24,44 @@ namespace ScheduleWPF.Views
     /// </summary>
     public partial class MainPageEditAddSubPage : Page
     {
+        private EditAddViewModelBase _editAddViewModel;
+        private EditAddViewModelBase EditAddViewModel
+        {
+            get => _editAddViewModel;
+            set
+            {
+                _editAddViewModel = value;
+                this.DataContext = _editAddViewModel;
+            }
+        }
         public MainPageEditAddSubPage(Lecture lecture)
         {
             InitializeComponent();
-            this.DataContext = new EditViewModel(lecture);
+            EditAddViewModel = new EditViewModel(lecture);
         }
-        public MainPageEditAddSubPage()
+        public MainPageEditAddSubPage(ref ObservableCollection<Lecture> lectures, DateOnly dateOnly, Group group)
         {
             InitializeComponent();
-            this.DataContext = new AddViewModel();
+            EditAddViewModel = new AddViewModel(ref lectures, dateOnly, group);
         }
-
         private void IsShortDayChBox_Click(object sender, RoutedEventArgs e)
         {
             TimeCBox.SelectedIndex = 0;
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ExecuteCommand(EditAddViewModel.SaveChangesCommand);
+            ExitPage();
+        }
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ExecuteCommand(EditAddViewModel.CancelChangesCommand);
+            ExitPage();
+        }
+        private void ExitPage()
+        {
+            NavigationService.Navigate(null);
         }
     }
 }

@@ -10,12 +10,16 @@
       FontFamily="Times new Roman"
       FontSize="24"
       >
-    <Grid>
+    <Grid Name="MainGrid" Visibility="Visible">
         <StackPanel>
             <StackPanel.Resources>
                 <Style TargetType="{x:Type ComboBox}">
                     <Setter Property="Margin" Value="0 0 0 10"/>
                     <Setter Property="Padding" Value="5"/>
+                </Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Padding" Value="10 5"/>
+                    <Setter Property="Margin" Value="0 10 10 10"/>
                 </Style>
             </StackPanel.Resources>
             <StackPanel Orientation="Horizontal">
@@ -59,6 +63,10 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Сохранить" Click="SaveButton_Click" IsDefault="True"/>
+                <Button Content="Отмена" Click="CancelButton_Click" IsCancel="True"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

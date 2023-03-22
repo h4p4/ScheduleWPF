@@ -38,7 +38,6 @@ namespace ScheduleWPF.Views
             _buttons = new List<Button>(BtnsGrid.Children.OfType<Button>().Where(n => n.Name.StartsWith("Show") && n.Name.EndsWith("Btn")));
             _selectedBackgroundColor = _buttons.ElementAt(0).Background;
             _defaultBackgroundColor = _buttons.ElementAt(1).Background;
-
             MainFrame.Content = _pages.ElementAt(_pageIndex);
         }
 

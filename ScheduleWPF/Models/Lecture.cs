@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 
 namespace ScheduleWPF.Models;
 
 public partial class Lecture
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     public string? Description { get; set; }
 
