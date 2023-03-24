@@ -23,10 +23,11 @@ namespace ScheduleWPF.Views
     /// </summary>
     public partial class MainPage : Page
     {
-        //private List<DataGrid> weekDataGrids;
+        private List<DataGrid> _weekDataGrids;
         private MainPageEditAddSubPage? _editAddSubPage;
         private MainViewModel _viewModel;
-
+        public DataGrid? PreviousSelectedDGrid { get; set; }
+        public DataGrid? PrePreviousSelectedDGrid { get; set; }
         private MainPageEditAddSubPage? EditAddSubPage
         {
             set
@@ -51,12 +52,25 @@ namespace ScheduleWPF.Views
             InitializeComponent();
             ViewModel = new MainViewModel();
             ChangeAddButtonsVisibility(ViewModel.CanAdd);
-            //weekDataGrids = new List<DataGrid>(LecturesGrid.Children.OfType<DataGrid>().Where(n => n.Name.EndsWith("LecturesDataGrid")));
+            _weekDataGrids = new List<DataGrid>(LecturesGrid.Children.OfType<DataGrid>().Where(n => n.Name.EndsWith("LecturesDataGrid")));
         }
 
         private void LecturesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EditAddSubPage = new MainPageEditAddSubPage((Lecture)((DataGrid)sender).SelectedItem);
+            DataGrid selectedDGrid = (DataGrid)sender;
+            EditAddSubPage = new MainPageEditAddSubPage((Lecture)selectedDGrid.SelectedItem);
+            //if (PreviousSelectedDGrid != null)
+            //{
+            //    PreviousSelectedDGrid.UnselectAll();
+            //    PreviousSelectedDGrid.UnselectAllCells();
+            //}
+            //if (PrePreviousSelectedDGrid != null)
+            //{
+            //    PrePreviousSelectedDGrid.UnselectAll();
+            //    PrePreviousSelectedDGrid.UnselectAllCells();
+            //}
+            //PreviousSelectedDGrid = selectedDGrid;
+            //PrePreviousSelectedDGrid = PreviousSelectedDGrid;
         }
         private void AnyCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

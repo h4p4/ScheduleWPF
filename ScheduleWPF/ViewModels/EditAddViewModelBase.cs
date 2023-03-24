@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ScheduleWPF.ViewModels
 {
@@ -59,7 +60,7 @@ namespace ScheduleWPF.ViewModels
             }
         }
 
-        public void IsShortDaySetWithoutUpdate(bool value)
+        public void SetIsShortDayWithoutUpdate(bool value)
         {
             SetProperty(ref _isShortDay, value);
             Handle();
@@ -78,18 +79,19 @@ namespace ScheduleWPF.ViewModels
             TimeList = new (IsShortDay ? _allTimeList.Where(x => x.DiffInMinutes == ShortLectureInMunutes) : 
                                           _allTimeList.Where(x => x.DiffInMinutes == FullLectureInMunutes));
         }
+
         [RelayCommand]
         protected virtual void SaveChanges()
         {
             try
             {
-                Helper.SaveChanges();
+                if (!Helper.SaveChanges()) throw new Exception();
+
             }
             catch (Exception)
             {
                 throw;
             }
-            
         }
         [RelayCommand]
         protected virtual void CancelChanges()

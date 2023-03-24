@@ -14,8 +14,8 @@ namespace ScheduleWPF.ViewModels
         public EditViewModel(Lecture lecture) : base()
         {
             Lecture = lecture;
-            if (lecture.Time == null || lecture == null) return;
-            IsShortDaySetWithoutUpdate(lecture.Time.DiffInMinutes == 60);
+            if (lecture == null || lecture.Time == null) return;
+            SetIsShortDayWithoutUpdate(lecture.Time.DiffInMinutes == 60);
         }
     }
 }

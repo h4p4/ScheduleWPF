@@ -167,7 +167,7 @@ namespace ScheduleWPF.ViewModels
             Lectures.Add(SaturdayLectures);
         }
 
-        private void Handle()
+        public void Handle()
         {
             ClearLectures();
             if (_selectedGroup.Id == -1) return;

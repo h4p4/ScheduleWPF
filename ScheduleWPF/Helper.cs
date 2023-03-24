@@ -23,7 +23,7 @@ namespace ScheduleWPF
         {
             return context;
         }
-        public static void SaveChanges()
+        public static bool SaveChanges()
         {
             try
             {
@@ -31,8 +31,9 @@ namespace ScheduleWPF
             }
             catch (Exception)
             {
-                throw;
+                return false;
             }
+            return true;
         }
         public static void DeleteChanges(object objectWithChanges)
         {
@@ -46,7 +47,16 @@ namespace ScheduleWPF
         public static bool ExecuteCommand(IRelayCommand? command)
         {
             if (command == null) return false;
-            command.Execute(null);
+            //if (!command.CanExecute(null)) return false;
+            //command.Execute(null);
+            try
+            {
+                command.Execute(null);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
             return true;
         }
     }

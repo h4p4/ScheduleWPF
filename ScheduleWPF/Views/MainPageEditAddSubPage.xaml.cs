@@ -51,17 +51,32 @@ namespace ScheduleWPF.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteCommand(EditAddViewModel.SaveChangesCommand);
-            ExitPage();
+            if (Helper.ExecuteCommand(EditAddViewModel.SaveChangesCommand))
+            {
+                ExitPage();
+                return;
+            }
+            if (EditAddViewModel is AddViewModel)
+                ShowErrorMessage("Не удалось сохранить лекцию.");
         }
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteCommand(EditAddViewModel.CancelChangesCommand);
-            ExitPage();
+            if (Helper.ExecuteCommand(EditAddViewModel.CancelChangesCommand))
+            {
+                ExitPage();
+                return;
+            }
+            
         }
         private void ExitPage()
         {
             NavigationService.Navigate(null);
+        }
+        private void ShowErrorMessage(string message)
+        {
+            MessageBox.Show(message, "Ошибка", 
+                MessageBoxButton.OK, MessageBoxImage.Error, 
+                MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
         }
     }
 }
