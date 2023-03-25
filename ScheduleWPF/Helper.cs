@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using CommunityToolkit.Mvvm.Input;
 using ScheduleWPF.Models;
 using ScheduleWPF.ViewModels;
@@ -48,8 +51,6 @@ namespace ScheduleWPF
         public static bool ExecuteCommand(IRelayCommand? command)
         {
             if (command == null) return false;
-            //if (!command.CanExecute(null)) return false;
-            //command.Execute(null);
             try
             {
                 command.Execute(null);
@@ -60,7 +61,7 @@ namespace ScheduleWPF
             }
             return true;
         }
-        public static void ThrowUnless(bool condition, string message)
+        public static void ThrowIf(bool condition, string message)
         {
             try
             {
@@ -71,7 +72,7 @@ namespace ScheduleWPF
                 throw;
             }
         }
-        public static void ThrowUnless(bool condition)
+        public static void ThrowIf(bool condition)
         {
             try
             {
@@ -82,5 +83,6 @@ namespace ScheduleWPF
                 throw;
             }
         }
+
     }
 }

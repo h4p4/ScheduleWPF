@@ -85,7 +85,7 @@ namespace ScheduleWPF.ViewModels
         [RelayCommand]
         protected virtual void SaveChanges()
         {
-            Helper.ThrowUnless(!Helper.SaveChanges());
+            Helper.ThrowIf(!Helper.SaveChanges());
         }
         [RelayCommand]
         protected virtual void CancelChanges()
