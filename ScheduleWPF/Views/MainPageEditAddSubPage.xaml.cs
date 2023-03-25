@@ -63,10 +63,10 @@ namespace ScheduleWPF.Views
         {
             if (Helper.ExecuteCommand(EditAddViewModel.CancelChangesCommand))
             {
+                Helper.MainViewModel.UpdateView();
                 ExitPage();
                 return;
             }
-            
         }
         private void ExitPage()
         {

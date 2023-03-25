@@ -67,12 +67,14 @@ namespace ScheduleWPF.ViewModels
         }
         public EditAddViewModelBase()
         {
+            Helper.ExecuteCommand(CancelChangesCommand);
             _date = DateOnly.FromDateTime(DateTime.Now);
             _roomList = new ObservableCollection<Room>(Helper.GetContext().Rooms);
             _subjectList = new ObservableCollection<Subject>(Helper.GetContext().Subjects);
             _allTimeList = new ObservableCollection<Time>(Helper.GetContext().Times);
             _lecturerList = new ObservableCollection<Lecturer>(Helper.GetContext().Lecturers);
             Handle();
+
         }
         private void Handle()
         {
@@ -83,15 +85,7 @@ namespace ScheduleWPF.ViewModels
         [RelayCommand]
         protected virtual void SaveChanges()
         {
-            try
-            {
-                if (!Helper.SaveChanges()) throw new Exception();
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            Helper.ThrowUnless(!Helper.SaveChanges());
         }
         [RelayCommand]
         protected virtual void CancelChanges()

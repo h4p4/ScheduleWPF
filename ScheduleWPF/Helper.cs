@@ -38,6 +38,7 @@ namespace ScheduleWPF
         public static void DeleteChanges(object objectWithChanges)
         {
             context.Entry(objectWithChanges).Reload();
+            context.Update(objectWithChanges);
         }
         public static void Add<T>(T objectToAdd, ObservableCollection<T> collection)
         {
@@ -58,6 +59,28 @@ namespace ScheduleWPF
                 return false;
             }
             return true;
+        }
+        public static void ThrowUnless(bool condition, string message)
+        {
+            try
+            {
+                if (condition) throw new Exception(message);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static void ThrowUnless(bool condition)
+        {
+            try
+            {
+                if (condition) throw new Exception();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
