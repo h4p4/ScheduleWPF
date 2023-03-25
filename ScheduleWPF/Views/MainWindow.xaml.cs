@@ -28,9 +28,7 @@ namespace ScheduleWPF.Views
         private List<Page> _pages = new List<Page>()
         {
             new MainPage(),
-            new SubjectsPage(),
-            new LecturersPage(),
-            new RoomsPage()
+            new EditModelForm()
         };
         public MainWindow()
         {
@@ -58,17 +56,7 @@ namespace ScheduleWPF.Views
             Handle(sender as Button);
         }
 
-        private void ShowSubjectsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Handle(sender as Button);
-        }
-
-        private void ShowLecturersBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Handle(sender as Button);
-        }
-
-        private void ShowRoomsBtn_Click(object sender, RoutedEventArgs e)
+        private void ShowEditFormBtn_Click(object sender, RoutedEventArgs e)
         {
             Handle(sender as Button);
         }

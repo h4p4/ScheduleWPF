@@ -20,9 +20,9 @@ using System.Windows.Shapes;
 namespace ScheduleWPF.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainPageEditAddSubPage.xaml
+    /// Логика взаимодействия для MainPageEditAddLectureForm.xaml
     /// </summary>
-    public partial class MainPageEditAddSubPage : Page
+    public partial class MainPageEditAddLectureForm : Page
     {
         private EditAddViewModelBase _editAddViewModel;
         private EditAddViewModelBase EditAddViewModel
@@ -34,12 +34,12 @@ namespace ScheduleWPF.Views
                 this.DataContext = _editAddViewModel;
             }
         }
-        public MainPageEditAddSubPage(Lecture lecture)
+        public MainPageEditAddLectureForm(Lecture lecture)
         {
             InitializeComponent();
             EditAddViewModel = new EditViewModel(lecture);
         }
-        public MainPageEditAddSubPage(ref ObservableCollection<Lecture> lectures, DateOnly dateOnly, Group group)
+        public MainPageEditAddLectureForm(ref ObservableCollection<Lecture> lectures, DateOnly dateOnly, Group group)
         {
             InitializeComponent();
             EditAddViewModel = new AddViewModel(ref lectures, dateOnly, group);
@@ -61,12 +61,9 @@ namespace ScheduleWPF.Views
         }
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Helper.ExecuteCommand(EditAddViewModel.CancelChangesCommand))
-            {
-                Helper.MainViewModel.UpdateView();
-                ExitPage();
-                return;
-            }
+            Helper.ExecuteCommand(EditAddViewModel.CancelChangesCommand);
+            Helper.MainViewModel.UpdateView();
+            ExitPage();
         }
         private void ExitPage()
         {

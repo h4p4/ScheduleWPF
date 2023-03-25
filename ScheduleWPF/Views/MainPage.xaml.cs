@@ -24,10 +24,10 @@ namespace ScheduleWPF.Views
     public partial class MainPage : Page
     {
         private List<DataGrid> _weekDataGrids;
-        private MainPageEditAddSubPage? _editAddSubPage;
+        private MainPageEditAddLectureForm? _editAddSubPage;
         private MainViewModel _viewModel;
         private DataGrid? _previousSelectedDGrid;
-        private MainPageEditAddSubPage? EditAddSubPage
+        private MainPageEditAddLectureForm? EditAddSubPage
         {
             set
             {
@@ -57,7 +57,7 @@ namespace ScheduleWPF.Views
         private void LecturesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid selectedDGrid = (DataGrid)sender;
-            EditAddSubPage = new MainPageEditAddSubPage((Lecture)selectedDGrid.SelectedItem);
+            EditAddSubPage = new MainPageEditAddLectureForm((Lecture)selectedDGrid.SelectedItem);
             selectedDGrid.SelectionChanged -= LecturesDataGrid_SelectionChanged;
             var focusedElement = FocusManager.GetFocusedElement(selectedDGrid);
             UnfocusPreviousSelection();
@@ -92,7 +92,7 @@ namespace ScheduleWPF.Views
         private void AddLectureBtn_Click(object sender, RoutedEventArgs e)
         {
             int dow = Grid.GetColumn(((Button)sender));
-            EditAddSubPage = new MainPageEditAddSubPage(ref ViewModel._allLectures, ViewModel.SelectedDoubleDate.FirstDate.AddDays(dow), ViewModel.SelectedGroup);
+            EditAddSubPage = new MainPageEditAddLectureForm(ref ViewModel._allLectures, ViewModel.SelectedDoubleDate.FirstDate.AddDays(dow), ViewModel.SelectedGroup);
         }
 
         private void ChangeAddButtonsVisibility(bool isVisible)

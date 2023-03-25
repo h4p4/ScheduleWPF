@@ -25,12 +25,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Click="ShowScheduleBtn_Click" Background="DarkGray" Padding="0 12" Margin="20 10 10 10" Grid.Column="0" Name="ShowScheduleBtn" FontWeight="Bold">Расписание</Button>
-            <Button Click="ShowSubjectsBtn_Click" Padding="0 12" Margin="10 10" Grid.Column="1" Name="ShowSubjectsBtn">Предметы</Button>
-            <Button Click="ShowLecturersBtn_Click" Padding="0 12" Margin="10 10" Grid.Column="2" Name="ShowLecturersBtn">Преподаватели</Button>
-            <Button Click="ShowRoomsBtn_Click" Padding="0 12" Margin="10 10 20 10" Grid.Column="3" Name="ShowRoomsBtn">Аудитории</Button>
+            <Button Click="ShowEditFormBtn_Click" Padding="0 12" Margin="10 10" Grid.Column="1" Name="ShowSubjectsBtn">Редактирование</Button>
         </Grid>
         <Grid Grid.Row="1" Margin="20 10 20 20">
-            <Frame Name="MainFrame" NavigationUIVisibility="Hidden"/>
+            <Border BorderBrush="DarkGray" BorderThickness="1" Padding="10">
+                <Frame Name="MainFrame" NavigationUIVisibility="Hidden"/>
+            </Border>
         </Grid>
     </Grid>
 </Window>

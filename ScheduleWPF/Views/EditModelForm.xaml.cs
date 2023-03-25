@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ScheduleWPF.Views
 {
     /// <summary>
-    /// Логика взаимодействия для SubjectsPage.xaml
+    /// Логика взаимодействия для EditModelForm.xaml
     /// </summary>
-    public partial class SubjectsPage : Page
+    public partial class EditModelForm : Page
     {
-        public SubjectsPage()
+        public EditModelForm()
         {
             InitializeComponent();
         }
