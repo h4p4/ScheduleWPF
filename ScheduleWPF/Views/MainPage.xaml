@@ -78,7 +78,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
-                                              SelectedValuePath="Id"
+                                              SelectedValuePath="Id" 
                                   SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" 
                                   BorderBrush="LightGray" Grid.Column="0" ItemsSource="{Binding MondayLectures, UpdateSourceTrigger=PropertyChanged}" 
                                   IsReadOnly="True" Name="MondayLecturesDataGrid" AutoGenerateColumns="False" 

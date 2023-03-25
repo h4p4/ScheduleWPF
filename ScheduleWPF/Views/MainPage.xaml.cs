@@ -26,8 +26,7 @@ namespace ScheduleWPF.Views
         private List<DataGrid> _weekDataGrids;
         private MainPageEditAddSubPage? _editAddSubPage;
         private MainViewModel _viewModel;
-        public DataGrid? PreviousSelectedDGrid { get; set; }
-        public DataGrid? PrePreviousSelectedDGrid { get; set; }
+        private DataGrid? _previousSelectedDGrid;
         private MainPageEditAddSubPage? EditAddSubPage
         {
             set
@@ -59,18 +58,29 @@ namespace ScheduleWPF.Views
         {
             DataGrid selectedDGrid = (DataGrid)sender;
             EditAddSubPage = new MainPageEditAddSubPage((Lecture)selectedDGrid.SelectedItem);
-            //if (PreviousSelectedDGrid != null)
-            //{
-            //    PreviousSelectedDGrid.UnselectAll();
-            //    PreviousSelectedDGrid.UnselectAllCells();
-            //}
-            //if (PrePreviousSelectedDGrid != null)
-            //{
-            //    PrePreviousSelectedDGrid.UnselectAll();
-            //    PrePreviousSelectedDGrid.UnselectAllCells();
-            //}
-            //PreviousSelectedDGrid = selectedDGrid;
-            //PrePreviousSelectedDGrid = PreviousSelectedDGrid;
+            selectedDGrid.SelectionChanged -= LecturesDataGrid_SelectionChanged;
+            var focusedElement = FocusManager.GetFocusedElement(selectedDGrid);
+            UnfocusPreviousSelection();
+            _previousSelectedDGrid = selectedDGrid;
+            FocusCurrentSelection();
+            selectedDGrid.SelectionChanged += LecturesDataGrid_SelectionChanged;
+            void UnfocusPreviousSelection()
+            {
+                if (_previousSelectedDGrid == null) return;
+                if (_previousSelectedDGrid.Name == selectedDGrid.Name) return;
+                _previousSelectedDGrid.SelectionChanged -= LecturesDataGrid_SelectionChanged;
+                Keyboard.ClearFocus();
+                FocusManager.SetFocusedElement(FocusManager.GetFocusScope(_previousSelectedDGrid), null);
+                _previousSelectedDGrid.UnselectAll();
+                _previousSelectedDGrid.SelectionChanged += LecturesDataGrid_SelectionChanged;
+            }
+            void FocusCurrentSelection()
+            {
+                selectedDGrid.Focus();
+                Keyboard.Focus(selectedDGrid);
+                Keyboard.Focus(focusedElement);
+                FocusManager.SetFocusedElement(FocusManager.GetFocusScope(selectedDGrid), focusedElement);
+            }
         }
         private void AnyCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
