@@ -38,6 +38,7 @@ namespace ScheduleWPF.Views
         {
             InitializeComponent();
             EditAddViewModel = new EditViewModel(lecture);
+
         }
         public MainPageEditAddLectureForm(ref ObservableCollection<Lecture> lectures, DateOnly dateOnly, Group group)
         {
@@ -65,15 +66,15 @@ namespace ScheduleWPF.Views
             Helper.MainViewModel.UpdateView();
             ExitPage();
         }
-        private void ExitPage()
-        {
-            NavigationService.Navigate(null);
-        }
         private void ShowErrorMessage(string message)
         {
             MessageBox.Show(message, "Ошибка", 
                 MessageBoxButton.OK, MessageBoxImage.Error, 
                 MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
+        }
+        private void ExitPage()
+        {
+            NavigationService.Navigate(null);
         }
     }
 }

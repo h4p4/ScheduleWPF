@@ -23,7 +23,7 @@ namespace ScheduleWPF.Views
     /// </summary>
     public partial class MainPage : Page
     {
-        private List<DataGrid> _weekDataGrids;
+        //private List<DataGrid> _weekDataGrids;
         private MainPageEditAddLectureForm? _editAddSubPage;
         private MainViewModel _viewModel;
         private DataGrid? _previousSelectedDGrid;
@@ -51,7 +51,7 @@ namespace ScheduleWPF.Views
             InitializeComponent();
             ViewModel = new MainViewModel();
             ChangeAddButtonsVisibility(ViewModel.CanAdd);
-            _weekDataGrids = new List<DataGrid>(LecturesGrid.Children.OfType<DataGrid>().Where(n => n.Name.EndsWith("LecturesDataGrid")));
+            //_weekDataGrids = new List<DataGrid>(LecturesGrid.Children.OfType<DataGrid>().Where(n => n.Name.EndsWith("LecturesDataGrid")));
         }
 
         private void LecturesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,6 +64,7 @@ namespace ScheduleWPF.Views
             _previousSelectedDGrid = selectedDGrid;
             FocusCurrentSelection();
             selectedDGrid.SelectionChanged += LecturesDataGrid_SelectionChanged;
+
             void UnfocusPreviousSelection()
             {
                 if (_previousSelectedDGrid == null) return;
@@ -94,6 +95,15 @@ namespace ScheduleWPF.Views
             int dow = Grid.GetColumn(((Button)sender));
             EditAddSubPage = new MainPageEditAddLectureForm(ref ViewModel._allLectures, ViewModel.SelectedDoubleDate.FirstDate.AddDays(dow), ViewModel.SelectedGroup);
         }
+        private void DeleteLecture_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены что хотите удалить выбранную лекцию?", String.Empty, MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) return;
+            MessageBoxResult messageBoxResult;
+            do {
+                if (DeleteLecture()) return;
+                messageBoxResult = MessageBox.Show("Не удалось удалить лекцию!\nПопробовать еще раз?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            } while (messageBoxResult == MessageBoxResult.Yes);
+        }
 
         private void ChangeAddButtonsVisibility(bool isVisible)
         {
@@ -103,6 +113,20 @@ namespace ScheduleWPF.Views
                 return;
             }
             AddBtnsStackPanel.Visibility = Visibility.Hidden;
+        }
+        private bool DeleteLecture()
+        {
+            if (EditAddSubPage != null)
+            {
+                var returnValue = Helper.ExecuteCommand(ViewModel.DeleteLectureCommand);
+                CloseForm();
+                return returnValue;
+            }
+            return Helper.ExecuteCommand(ViewModel.DeleteLectureCommand);
+        }
+        private void CloseForm()
+        {
+            EditAddFrame.NavigationService.Navigate(null);
         }
     }
 }

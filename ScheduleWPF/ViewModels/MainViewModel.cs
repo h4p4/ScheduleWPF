@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.VisualBasic;
@@ -167,7 +168,7 @@ namespace ScheduleWPF.ViewModels
             Lectures.Add(SaturdayLectures);
         }
 
-        public void Handle()
+        private void Handle()
         {
             ClearLectures();
             if (_selectedGroup.Id == -1) return;
@@ -188,6 +189,14 @@ namespace ScheduleWPF.ViewModels
         {
             InitLecturesPool();
             Handle();
+        }
+
+        [RelayCommand]
+        private void DeleteLecture()
+        {
+            Helper.GetContext().Lectures.Remove(SelectedLecture);
+            Helper.ThrowIf(!Helper.SaveChanges(), "Не удалось удалить лекцию.");
+            UpdateView();
         }
     }
 }

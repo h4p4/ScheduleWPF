@@ -7,27 +7,22 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPageEditAddLectureForm"
-      FontFamily="Times new Roman"
       FontSize="24"
       >
     <Grid Name="MainGrid" Visibility="Visible">
         <StackPanel>
             <StackPanel.Resources>
-                <Style TargetType="{x:Type ComboBox}">
+                <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MahApps.Styles.ComboBox}">
+                    <Setter Property="FontSize" Value="24"/>
                     <Setter Property="Margin" Value="0 0 0 10"/>
                     <Setter Property="Padding" Value="5"/>
                 </Style>
-                <Style TargetType="{x:Type Button}">
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MahApps.Styles.Button}">
+                    <Setter Property="FontSize" Value="24"/>
                     <Setter Property="Padding" Value="10 5"/>
                     <Setter Property="Margin" Value="0 10 10 10"/>
                 </Style>
             </StackPanel.Resources>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Сокращённый день?"/>
-                <CheckBox Name="IsShortDayChBox" VerticalAlignment="Center"
-                          IsChecked="{Binding IsShortDay, UpdateSourceTrigger=PropertyChanged}"
-                          Click="IsShortDayChBox_Click"/>
-            </StackPanel>
             <TextBlock Text="Предмет:"/>
             <ComboBox ItemsSource="{Binding SubjectList}" 
                   SelectedItem="{Binding Lecture.Subject, UpdateSourceTrigger=PropertyChanged}" 
@@ -46,13 +41,19 @@
             <TextBlock Text="Время:"/>
             <ComboBox ItemsSource="{Binding TimeList}" 
                   SelectedItem="{Binding Lecture.Time, UpdateSourceTrigger=PropertyChanged}" 
-                  SelectedValuePath="Id" Name="TimeCBox">
+                  SelectedValuePath="Id" Name="TimeCBox" Margin="0 0 0 0">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding FormattedDoubleTime}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Text="Сокращённый день?"/>
+                <CheckBox Name="IsShortDayChBox" VerticalAlignment="Center"
+                          IsChecked="{Binding IsShortDay, UpdateSourceTrigger=PropertyChanged}"
+                          Click="IsShortDayChBox_Click"/>
+            </StackPanel>
             <TextBlock Text="Преподаватель:"/>
             <ComboBox ItemsSource="{Binding LecturerList}" 
                   SelectedItem="{Binding Lecture.Lecturer, UpdateSourceTrigger=PropertyChanged}" 
@@ -65,7 +66,7 @@
             </ComboBox>
             <StackPanel Orientation="Horizontal">
                 <Button Content="Сохранить" Click="SaveButton_Click" IsDefault="True"/>
-                <Button Content="Отмена" Click="CancelButton_Click" IsCancel="True"/>
+                <Button Content="Отмена" Click="CancelButton_Click" IsCancel="True" FontWeight="Medium"/>
             </StackPanel>
         </StackPanel>
     </Grid>

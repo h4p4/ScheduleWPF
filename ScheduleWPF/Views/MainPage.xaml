@@ -4,47 +4,50 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ScheduleWPF.Views" 
-      xmlns:viewmodels="clr-namespace:ScheduleWPF.ViewModels" 
+      xmlns:viewmodels="clr-namespace:ScheduleWPF.ViewModels"
       xmlns:utils="clr-namespace:ScheduleWPF.Utilities" 
+      xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
       d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainPage" FontFamily="Times new Roman" FontSize="22">
+      Title="MainPage" FontFamily="Times new Roman" FontSize="19">
     <Page.Resources>
         <utils:DivideByTwoConverter x:Key="DivideByTwoConverter"/>
         <utils:MarginConverter x:Key="MarginConverter"/>
     </Page.Resources>
-    <Grid Background="White">
+    <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="70" Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Margin="0 0 0 10">
+            <Grid.Resources>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Padding" Value="8 0"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="FontFamily" Value="{StaticResource MahApps.Fonts.Family.Button}"/>
+                </Style>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ComboBox Padding="8 0" Grid.Column="0" Margin="0 10 20 10"                       
-                          HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-                          ItemsSource="{Binding AllYears}" SelectedValue="{Binding SelectedYear}"
-                          Name="YearsCBox" SelectionChanged="AnyCBox_SelectionChanged"/>
-            <ComboBox Padding="8 0" Grid.Column="1" Margin="0 10 10 10" 
-                          HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-                          ItemsSource="{Binding DoubleDates}" SelectedItem="{Binding SelectedDoubleDate, UpdateSourceTrigger=PropertyChanged}"
-                          DisplayMemberPath="View" SelectedValuePath="View" 
-                          Name="DatesCBox" SelectionChanged="AnyCBox_SelectionChanged"/>
-            <ComboBox Padding="8 0" Grid.Column="3" HorizontalAlignment="Right" Margin="10 10 0 10"                           
-                          HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-                          ItemsSource="{Binding AllGroups}" SelectedItem="{Binding SelectedGroup, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedValuePath="Title"
-                          Name="GroupsCBox" SelectionChanged="AnyCBox_SelectionChanged">
-                <ComboBox.Style>
-                    <Style TargetType="ComboBox" >
-                        <Setter Property="Popup.FlowDirection" Value="RightToLeft"/>
-                    </Style>
-                </ComboBox.Style>
+            <ComboBox Grid.Column="0" Margin="0 10 20 10"                       
+                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                      ItemsSource="{Binding AllYears}" SelectedValue="{Binding SelectedYear}"
+                      Name="YearsCBox" SelectionChanged="AnyCBox_SelectionChanged"/>
+            <ComboBox Grid.Column="1" Margin="0 10 10 10" 
+                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                      ItemsSource="{Binding DoubleDates}" SelectedItem="{Binding SelectedDoubleDate, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="View" SelectedValuePath="View" 
+                      Name="DatesCBox" SelectionChanged="AnyCBox_SelectionChanged"/>
+            <ComboBox Grid.Column="3" HorizontalAlignment="Right" Margin="10 10 0 10"                           
+                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                      ItemsSource="{Binding AllGroups}" SelectedItem="{Binding SelectedGroup, UpdateSourceTrigger=PropertyChanged}" 
+                      SelectedValuePath="Title"
+                      Name="GroupsCBox" SelectionChanged="AnyCBox_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title}" TextWrapping="Wrap"/>
@@ -57,7 +60,7 @@
             <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Width="Auto">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -66,8 +69,46 @@
                     </Grid.RowDefinitions>
                     <Border Grid.Column="0"  VerticalAlignment="Top" BorderBrush="DarkGray" BorderThickness="0 0 1 1">
                         <ScrollViewer Name="LecturesScViewer" CanContentScroll="True" MaxHeight="763"
-                                      HorizontalScrollBarVisibility="Auto">
-                            <Grid x:Name="LecturesGrid" >
+                                      HorizontalScrollBarVisibility="Auto" Width="Auto">
+                            <Grid x:Name="LecturesGrid" Width="Auto">
+                                <Grid.Resources>
+                                    <Style x:Key="DeleteButtonStyle" TargetType="{x:Type Button}">
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="FontSize" Value="20"/>
+                                        <Setter Property="Foreground" Value="#706e6e"/>
+                                        <Setter Property="Content" Value="🗑"/>
+                                        <Setter Property="Grid.Column" Value="1"/>
+                                    </Style>
+                                    <Style TargetType="DataGridRow">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="Foreground" Value="Black" />
+                                        
+                                    </Style>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background" Value="White"/>
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Style>
+                                    <Style TargetType="DataGrid">
+                                        <Setter Property="Width" Value="Auto"/>
+                                        <Setter Property="SelectedValuePath" Value="Id"/>
+                                        <Setter Property="SelectionMode" Value="Single"/>
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+                                        <Setter Property="IsReadOnly" Value="True"/>
+                                        <Setter Property="AutoGenerateColumns" Value="False"/>
+                                        <Setter Property="ColumnWidth" Value="*"/>
+                                        <Setter Property="CanUserResizeColumns" Value="False"/>
+                                        <Setter Property="CanUserReorderColumns" Value="False"/>
+                                        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden"/>
+                                        <Setter Property="CanUserSortColumns" Value="False"/>
+                                        <Setter Property="MinRowHeight" Value="40"/>
+                                        <Setter Property="HeadersVisibility" Value="Column"/>
+                                        <Setter Property="HorizontalGridLinesBrush" Value="LightGray"/>
+                                        <Setter Property="VerticalGridLinesBrush" Value="LightGray"/>
+                                        <Setter Property="Grid.Row" Value="1"/>
+                                        <Setter Property="SelectedItem" Value="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Style>
+                                </Grid.Resources>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -76,129 +117,148 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
-                                              SelectedValuePath="Id" 
-                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" 
-                                  BorderBrush="LightGray" Grid.Column="0" ItemsSource="{Binding MondayLectures, UpdateSourceTrigger=PropertyChanged}" 
-                                  IsReadOnly="True" Name="MondayLecturesDataGrid" AutoGenerateColumns="False" 
-                                  ColumnWidth="*" CanUserResizeColumns="False" CanUserResizeRows="False"
-                                  CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto" 
-                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" 
-                                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" 
-                                  Grid.Row="1">
+                                <DataGrid SelectionChanged="LecturesDataGrid_SelectionChanged" Name="MondayLecturesDataGrid"
+                                          Grid.Column="0" ItemsSource="{Binding MondayLectures, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Понедельник" MinWidth="150" Width="Auto">
-                                            <DataGridTextColumn.Binding>
-                                                <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
-                                                    <Binding Path="Time.FormattedDoubleTime"/>
-                                                    <Binding Path="Subject.Title"/>
-                                                    <Binding Path="Room.Title"/>
-                                                    <Binding Path="Lecturer.FormattedFullName"/>
-                                                </MultiBinding>
-                                            </DataGridTextColumn.Binding>
-                                        </DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Понедельник" Width="Auto">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock Text="{Binding Path=Subject.Title}"/>
+                                                        <TextBlock Text="{Binding Path=Lecturer.FormattedFullName}"/>
+                                                        <TextBlock Text="{Binding Path=Time.FormattedDoubleTime}"/>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Grid.Column="0" Text="{Binding Path=Room.Title}"/>
+                                                            <Button Click="DeleteLecture_Click" Style="{StaticResource DeleteButtonStyle}"/>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
-                                              SelectedValuePath="Id"
-                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" 
-                                  BorderBrush="LightGray" Grid.Column="1" ItemsSource="{Binding TuesdayLectures, UpdateSourceTrigger=PropertyChanged}" 
-                                  IsReadOnly="True" Name="TuesdayLecturesDataGrid" AutoGenerateColumns="False" 
-                                  ColumnWidth="*" CanUserResizeColumns="False" CanUserResizeRows="False" 
-                                  CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto" 
-                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" 
-                                  HorizontalGridLinesBrush="LightGray"  VerticalGridLinesBrush="LightGray" Grid.Row="1">
+                                <DataGrid SelectionChanged="LecturesDataGrid_SelectionChanged" Name="TuesdayLecturesDataGrid"
+                                          Grid.Column="1" ItemsSource="{Binding TuesdayLectures, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Вторник" MinWidth="150" Width="Auto">
-                                            <DataGridTextColumn.Binding>
-                                                <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
-                                                    <Binding Path="Time.FormattedDoubleTime"/>
-                                                    <Binding Path="Subject.Title"/>
-                                                    <Binding Path="Room.Title"/>
-                                                    <Binding Path="Lecturer.FormattedFullName"/>
-                                                </MultiBinding>
-                                            </DataGridTextColumn.Binding>
-                                        </DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Вторник" Width="Auto">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock Text="{Binding Path=Subject.Title}"/>
+                                                        <TextBlock Text="{Binding Path=Lecturer.FormattedFullName}"/>
+                                                        <TextBlock Text="{Binding Path=Time.FormattedDoubleTime}"/>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Grid.Column="0" Text="{Binding Path=Room.Title}"/>
+                                                            <Button HorizontalAlignment="Right" Click="DeleteLecture_Click" Style="{StaticResource DeleteButtonStyle}"/>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
-                                              SelectedValuePath="Id"
-                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="2" ItemsSource="{Binding WednesdayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                                  Name="WednesdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
-                                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
-                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
-                                  VerticalGridLinesBrush="LightGray" Grid.Row="1">
+                                <DataGrid SelectionChanged="LecturesDataGrid_SelectionChanged" Name="WednesdayLecturesDataGrid"
+                                          Grid.Column="2" ItemsSource="{Binding WednesdayLectures, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Среда" MinWidth="150" Width="Auto">
-                                            <DataGridTextColumn.Binding>
-                                                <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
-                                                    <Binding Path="Time.FormattedDoubleTime"/>
-                                                    <Binding Path="Subject.Title"/>
-                                                    <Binding Path="Room.Title"/>
-                                                    <Binding Path="Lecturer.FormattedFullName"/>
-                                                </MultiBinding>
-                                            </DataGridTextColumn.Binding>
-                                        </DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Среда" Width="Auto">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock Text="{Binding Path=Subject.Title}"/>
+                                                        <TextBlock Text="{Binding Path=Lecturer.FormattedFullName}"/>
+                                                        <TextBlock Text="{Binding Path=Time.FormattedDoubleTime}"/>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Grid.Column="0" Text="{Binding Path=Room.Title}"/>
+                                                            <Button Click="DeleteLecture_Click" Style="{StaticResource DeleteButtonStyle}"/>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}"  
-                                              SelectedValuePath="Id"
-                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="3" ItemsSource="{Binding ThursdayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                                  Name="ThursdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
-                                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
-                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
-                                  VerticalGridLinesBrush="LightGray" Grid.Row="1">
+                                <DataGrid SelectionChanged="LecturesDataGrid_SelectionChanged" Name="ThursdayLecturesDataGrid"
+                                          Grid.Column="3" ItemsSource="{Binding ThursdayLectures, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Четверг" MinWidth="150" Width="Auto">
-                                            <DataGridTextColumn.Binding>
-                                                <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
-                                                    <Binding Path="Time.FormattedDoubleTime"/>
-                                                    <Binding Path="Subject.Title"/>
-                                                    <Binding Path="Room.Title"/>
-                                                    <Binding Path="Lecturer.FormattedFullName"/>
-                                                </MultiBinding>
-                                            </DataGridTextColumn.Binding>
-                                        </DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Четверг" Width="Auto">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock Text="{Binding Path=Subject.Title}"/>
+                                                        <TextBlock Text="{Binding Path=Lecturer.FormattedFullName}"/>
+                                                        <TextBlock Text="{Binding Path=Time.FormattedDoubleTime}"/>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Grid.Column="0" Text="{Binding Path=Room.Title}"/>
+                                                            <Button Click="DeleteLecture_Click" Style="{StaticResource DeleteButtonStyle}"/>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
-                                              SelectedValuePath="Id"
-                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="4" ItemsSource="{Binding FridayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                                  Name="FridayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
-                                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
-                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
-                                  VerticalGridLinesBrush="LightGray" Grid.Row="1">
+                                <DataGrid SelectionChanged="LecturesDataGrid_SelectionChanged" Name="FridayLecturesDataGrid"
+                                          Grid.Column="4" ItemsSource="{Binding FridayLectures, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Пятница" MinWidth="150" Width="Auto">
-                                            <DataGridTextColumn.Binding>
-                                                <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
-                                                    <Binding Path="Time.FormattedDoubleTime"/>
-                                                    <Binding Path="Subject.Title"/>
-                                                    <Binding Path="Room.Title"/>
-                                                    <Binding Path="Lecturer.FormattedFullName"/>
-                                                </MultiBinding>
-                                            </DataGridTextColumn.Binding>
-                                        </DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Пятница" Width="Auto">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock Text="{Binding Path=Subject.Title}"/>
+                                                        <TextBlock Text="{Binding Path=Lecturer.FormattedFullName}"/>
+                                                        <TextBlock Text="{Binding Path=Time.FormattedDoubleTime}"/>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Grid.Column="0" Text="{Binding Path=Room.Title}"/>
+                                                            <Button Click="DeleteLecture_Click" Style="{StaticResource DeleteButtonStyle}"/>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <DataGrid SelectedItem="{Binding SelectedLecture, UpdateSourceTrigger=PropertyChanged}" 
-                                              SelectedValuePath="Id"
-                                  SelectionChanged="LecturesDataGrid_SelectionChanged" SelectionMode="Single" BorderBrush="LightGray" Grid.Column="5" ItemsSource="{Binding SaturdayLectures, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                                  Name="SaturdayLecturesDataGrid" AutoGenerateColumns="False" ColumnWidth="*" CanUserResizeColumns="False" 
-                                  CanUserResizeRows="False" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto"
-                                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" 
-                                  VerticalGridLinesBrush="LightGray" Grid.Row="1">
+                                <DataGrid SelectionChanged="LecturesDataGrid_SelectionChanged" Name="SaturdayLecturesDataGrid"
+                                          Grid.Column="5" ItemsSource="{Binding SaturdayLectures, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Суббота" MinWidth="150" Width="Auto">
-                                            <DataGridTextColumn.Binding>
-                                                <MultiBinding StringFormat="{} {1} &#x0a; {3} &#x0a; {0} &#x0a; {2}">
-                                                    <Binding Path="Time.FormattedDoubleTime"/>
-                                                    <Binding Path="Subject.Title"/>
-                                                    <Binding Path="Room.Title"/>
-                                                    <Binding Path="Lecturer.FormattedFullName"/>
-                                                </MultiBinding>
-                                            </DataGridTextColumn.Binding>
-                                        </DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Суббота" Width="Auto">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock Text="{Binding Path=Subject.Title}"/>
+                                                        <TextBlock Text="{Binding Path=Lecturer.FormattedFullName}"/>
+                                                        <TextBlock Text="{Binding Path=Time.FormattedDoubleTime}"/>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Grid.Column="0" Text="{Binding Path=Room.Title}"/>
+                                                            <Button Click="DeleteLecture_Click" Style="{StaticResource DeleteButtonStyle}"/>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -206,31 +266,33 @@
                     </Border>
                     <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" MaxHeight="100" VerticalAlignment="Top" Name="AddBtnsStackPanel">
                         <StackPanel.Resources>
-                            <Style TargetType="Button">
+                            <Style TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button}">
                                 <Setter Property="Padding" Value="0 15"/>
+                                <Setter Property="Content" Value="➕"/>
+                                <Setter Property="FontSize" Value="20"/>
                             </Style>
                         </StackPanel.Resources>
-                        <Button Name="MondayAddLectureBtn" Content="➕" Grid.Column="0" 
+                        <Button Name="MondayAddLectureBtn" Grid.Column="0" 
                                     Width="{Binding ElementName=MondayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=MondayAddLectureBtn, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
                                     Click="AddLectureBtn_Click"/>
-                        <Button Name="TuesdayAddLectureBtn" Content="➕" Grid.Column="1" 
+                        <Button Name="TuesdayAddLectureBtn" Grid.Column="1" 
                                     Width="{Binding ElementName=TuesdayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=TuesdayLecturesDataGrid, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
                                     Click="AddLectureBtn_Click"/>
-                        <Button Name="WednesdayAddLectureBtn" Content="➕" Grid.Column="2" 
+                        <Button Name="WednesdayAddLectureBtn" Grid.Column="2" 
                                     Width="{Binding ElementName=WednesdayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=WednesdayLecturesDataGrid, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
                                     Click="AddLectureBtn_Click"/>
-                        <Button Name="ThursdayAddLectureBtn" Content="➕" Grid.Column="3" 
+                        <Button Name="ThursdayAddLectureBtn" Grid.Column="3" 
                                     Width="{Binding ElementName=ThursdayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=ThursdayLecturesDataGrid, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
                                     Click="AddLectureBtn_Click"/>
-                        <Button Name="FridayAddLectureBtn" Content="➕" Grid.Column="4" 
+                        <Button Name="FridayAddLectureBtn" Grid.Column="4" 
                                     Width="{Binding ElementName=FridayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=FridayLecturesDataGrid, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
                                     Click="AddLectureBtn_Click"/>
-                        <Button Name="SaturdayAddLectureBtn" Content="➕" Grid.Column="5" 
+                        <Button Name="SaturdayAddLectureBtn" Grid.Column="5" 
                                     Width="{Binding ElementName=SaturdayLecturesDataGrid ,Path=ActualWidth, Converter={StaticResource DivideByTwoConverter}}"
                                     Margin="{Binding ElementName=SaturdayLecturesDataGrid, Path=ActualWidth, Converter={StaticResource MarginConverter}}"
                                     Click="AddLectureBtn_Click"/>

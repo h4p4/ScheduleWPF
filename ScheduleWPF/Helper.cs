@@ -7,7 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using ScheduleWPF.Models;
 using ScheduleWPF.ViewModels;
 
@@ -15,13 +19,13 @@ namespace ScheduleWPF
 {
     public static class Helper
     {
+        private static readonly ScheduleContext context = new ScheduleContext();
         private static MainViewModel _mainViewModel;
         public static MainViewModel MainViewModel
         {
             get => _mainViewModel;
             set => _mainViewModel = value;
         }
-        private static ScheduleContext context = new ScheduleContext();
         public static ScheduleContext GetContext()
         {
             return context;
@@ -48,6 +52,20 @@ namespace ScheduleWPF
             collection.Add(objectToAdd);
             context.Update(objectToAdd);
         }
+        public static void AddRange<T>(List<T> deleteRange, ObservableCollection<T> collection)
+        {
+            foreach (var item in deleteRange)
+            {
+                collection.Add(item);
+                context.Update(item);
+            }
+        }
+        //public static void Delete<T>(T objectToDelete, ObservableCollection<T> collection)
+        //{
+        //    objectToDelete
+        //    collection.Remove(objectToDelete);
+        //    context.Update(collection);
+        //}
         public static bool ExecuteCommand(IRelayCommand? command)
         {
             if (command == null) return false;
@@ -83,6 +101,5 @@ namespace ScheduleWPF
                 throw;
             }
         }
-
     }
 }
