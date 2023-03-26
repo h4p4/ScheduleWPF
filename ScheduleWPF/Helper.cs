@@ -42,8 +42,9 @@ namespace ScheduleWPF
             }
             return true;
         }
-        public static void DeleteChanges(object objectWithChanges)
+        public static void DeleteChanges(object? objectWithChanges)
         {
+            if (objectWithChanges == null) return;
             context.Entry(objectWithChanges).Reload();
             context.Update(objectWithChanges);
         }

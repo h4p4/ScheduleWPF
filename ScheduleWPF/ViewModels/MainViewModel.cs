@@ -48,7 +48,7 @@ namespace ScheduleWPF.ViewModels
         private ObservableCollection<DateOnly> _allDates;
 
 
-        public ObservableCollection<Lecture> _allLectures;
+        private ObservableCollection<Lecture> _allLectures;
         public ObservableCollection<Lecture> AllLectures
         {
             get => _allLectures;

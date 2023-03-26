@@ -40,10 +40,10 @@ namespace ScheduleWPF.Views
             EditAddViewModel = new EditViewModel(lecture);
 
         }
-        public MainPageEditAddLectureForm(ref ObservableCollection<Lecture> lectures, DateOnly dateOnly, Group group)
+        public MainPageEditAddLectureForm(DateOnly dateOnly, Group group)
         {
             InitializeComponent();
-            EditAddViewModel = new AddViewModel(ref lectures, dateOnly, group);
+            EditAddViewModel = new AddViewModel(dateOnly, group);
         }
         private void IsShortDayChBox_Click(object sender, RoutedEventArgs e)
         {
@@ -63,7 +63,6 @@ namespace ScheduleWPF.Views
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Helper.ExecuteCommand(EditAddViewModel.CancelChangesCommand);
-            Helper.MainViewModel.UpdateView();
             ExitPage();
         }
         private void ShowErrorMessage(string message)

@@ -23,9 +23,9 @@ namespace ScheduleWPF.ViewModels
         private Subject _subject;
         [ObservableProperty]
         private Time _time;
-        public AddViewModel(ref ObservableCollection<Lecture> lectures, DateOnly dateOnly, Group group) : base()
+        public AddViewModel(DateOnly dateOnly, Group group) : base()
         {
-            _lectures = lectures;
+            _lectures = Helper.MainViewModel.AllLectures;
             _dateOnly = dateOnly;
             _group = group;
             Lecture = new();

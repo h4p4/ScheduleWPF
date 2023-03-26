@@ -67,7 +67,7 @@ namespace ScheduleWPF.ViewModels
         }
         public EditAddViewModelBase()
         {
-            Helper.ExecuteCommand(CancelChangesCommand);
+            Helper.DeleteChanges(Lecture);
             _date = DateOnly.FromDateTime(DateTime.Now);
             _roomList = new ObservableCollection<Room>(Helper.GetContext().Rooms);
             _subjectList = new ObservableCollection<Subject>(Helper.GetContext().Subjects);
@@ -91,6 +91,8 @@ namespace ScheduleWPF.ViewModels
         protected virtual void CancelChanges()
         {
             Helper.DeleteChanges(Lecture);
+            Helper.MainViewModel.UpdateView();
+
         }
     }
 }

@@ -93,7 +93,7 @@ namespace ScheduleWPF.Views
         private void AddLectureBtn_Click(object sender, RoutedEventArgs e)
         {
             int dow = Grid.GetColumn(((Button)sender));
-            EditAddSubPage = new MainPageEditAddLectureForm(ref ViewModel._allLectures, ViewModel.SelectedDoubleDate.FirstDate.AddDays(dow), ViewModel.SelectedGroup);
+            EditAddSubPage = new MainPageEditAddLectureForm(ViewModel.SelectedDoubleDate.FirstDate.AddDays(dow), ViewModel.SelectedGroup);
         }
         private void DeleteLecture_Click(object sender, RoutedEventArgs e)
         {
