@@ -1,13 +1,14 @@
-﻿using System;
+﻿using ScheduleWPF.Utilities;
+using System;
 using System.Collections.Generic;
 
 namespace ScheduleWPF.Models;
 
 public partial class Subject
 {
-    public int Id { get; set; }
+    internal int Id { get; set; }
 
     public string Title { get; set; } = null!;
 
-    public virtual ICollection<Lecture> Lectures { get; } = new List<Lecture>();
+    internal virtual ICollection<Lecture> Lectures { get; } = new List<Lecture>();
 }

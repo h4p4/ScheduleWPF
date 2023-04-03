@@ -29,7 +29,7 @@ namespace ScheduleWPF.Views
         private List<Page> _pages = new List<Page>()
         {
             new MainPage(),
-            new EditModelForm()
+            new EditEntityForm()
         };
         public MainWindow()
         {

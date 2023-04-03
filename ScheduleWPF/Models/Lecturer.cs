@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScheduleWPF.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,7 +8,7 @@ namespace ScheduleWPF.Models;
 
 public partial class Lecturer
 {
-    public int Id { get; set; }
+    internal int Id { get; set; }
 
     public string FirstName { get; set; } = null!;
 
@@ -15,7 +16,7 @@ public partial class Lecturer
 
     public string? MiddleName { get; set; }
 
-    public virtual ICollection<Lecture> Lectures { get; } = new List<Lecture>();
+    internal virtual ICollection<Lecture> Lectures { get; } = new List<Lecture>();
 
 
 

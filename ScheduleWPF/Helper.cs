@@ -30,6 +30,11 @@ namespace ScheduleWPF
         {
             return context;
         }
+        public static List<T> GetContext<T>() where T : class
+        {
+            DbSet<T> entities = context.Set<T>();
+            return entities.ToList();
+        }
         public static bool SaveChanges()
         {
             try
@@ -61,6 +66,8 @@ namespace ScheduleWPF
                 context.Update(item);
             }
         }
+
+
         //public static void Delete<T>(T objectToDelete, ObservableCollection<T> collection)
         //{
         //    objectToDelete

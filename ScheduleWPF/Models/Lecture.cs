@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ScheduleWPF.Models;
 
-public partial class Lecture
+public partial class Lecture 
 {
     public int? Id { get; set; }
 
