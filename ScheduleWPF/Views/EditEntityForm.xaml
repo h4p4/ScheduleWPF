@@ -11,22 +11,38 @@
       Title="EditEntityForm">
 
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="DataGrid">
+                <Setter Property="BorderBrush" Value="LightGray"/>
+                <Setter Property="HorizontalGridLinesBrush" Value="LightGray"/>
+                <Setter Property="VerticalGridLinesBrush" Value="LightGray"/>
+                <Setter Property="ColumnWidth" Value="*"/>
+                <Setter Property="CanUserResizeColumns" Value="False"/>
+                <Setter Property="CanUserResizeRows" Value="False"/>
+                <Setter Property="CanUserReorderColumns" Value="False"/>
+                <Setter Property="CanUserSortColumns" Value="False"/>
+                <Setter Property="IsReadOnly" Value="False"/>
+                <Setter Property="AutoGenerateColumns" Value="True"/>
+                <Setter Property="SelectionMode" Value="Single"/>
+                <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="MinRowHeight" Value="40"/>
+                <Setter Property="HeadersVisibility" Value="Column"/>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="70" Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ComboBox Padding="8 0" Grid.Row="0" Margin="0 10 20 10" Width="Auto"                     
                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                   DisplayMemberPath="Value"
                   Name="EditCBox" SelectionChanged="EditCBox_SelectionChanged" />
-        <DataGrid SelectionMode="Single" 
-                  BorderBrush="LightGray" Grid.Column="0" ItemsSource="{Binding SelectedEntityData}" 
-                  IsReadOnly="False" Name="EditDGrid" AutoGenerateColumns="True" 
-                  ColumnWidth="*" CanUserResizeColumns="False" CanUserResizeRows="False"
-                  CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto" 
-                  CanUserSortColumns="False" MinRowHeight="40" HeadersVisibility="Column" 
-                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" 
-                  Grid.Row="1"/>
+        <DataGrid Name="EditDGrid" Grid.Column="0" Grid.Row="1"
+                  ItemsSource="{Binding SelectedEntityData, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedItem="{Binding SelectedEntityInstance, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGeneratingColumn="EditDGrid_AutoGeneratingColumn"/>
+        <Button Grid.Row="2" Content="Сохранить" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Command="{Binding SaveChangesCommand}" Width="150"/>
 
     </Grid>
 </Page>

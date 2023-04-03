@@ -1,14 +1,16 @@
 ﻿using ScheduleWPF.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace ScheduleWPF.Models;
 
 public partial class Subject
 {
-    internal int Id { get; set; }
-
+    [Browsable(false)]
+    public int Id { get; set; }
+    [DisplayName("Название предмета")]
     public string Title { get; set; } = null!;
-
-    internal virtual ICollection<Lecture> Lectures { get; } = new List<Lecture>();
+    [Browsable(false)]
+    public virtual ICollection<Lecture> Lectures { get; } = new List<Lecture>();
 }

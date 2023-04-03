@@ -1,4 +1,5 @@
-﻿using ScheduleWPF.Views;
+﻿using ScheduleWPF.Utilities;
+using ScheduleWPF.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -26,7 +27,7 @@ namespace ScheduleWPF
         {
             e.Handled = true;
             var messageBoxResult = MessageBox.Show(
-                "Exception: " +
+                e.Exception.GetType().Name + ": " +
                 e.Exception.Message +
                 "\nCode: " +
                 e.Exception.HResult +

@@ -30,9 +30,9 @@ namespace ScheduleWPF
         {
             return context;
         }
-        public static List<T> GetContext<T>() where T : class
+        public static List<TEntity> GetContext<TEntity>() where TEntity : class
         {
-            DbSet<T> entities = context.Set<T>();
+            DbSet<TEntity> entities = context.Set<TEntity>();
             return entities.ToList();
         }
         public static bool SaveChanges()
@@ -66,14 +66,6 @@ namespace ScheduleWPF
                 context.Update(item);
             }
         }
-
-
-        //public static void Delete<T>(T objectToDelete, ObservableCollection<T> collection)
-        //{
-        //    objectToDelete
-        //    collection.Remove(objectToDelete);
-        //    context.Update(collection);
-        //}
         public static bool ExecuteCommand(IRelayCommand? command)
         {
             if (command == null) return false;
@@ -86,28 +78,6 @@ namespace ScheduleWPF
                 return false;
             }
             return true;
-        }
-        public static void ThrowIf(bool condition, string message)
-        {
-            try
-            {
-                if (condition) throw new Exception(message);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        public static void ThrowIf(bool condition)
-        {
-            try
-            {
-                if (condition) throw new Exception();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
     }
 }

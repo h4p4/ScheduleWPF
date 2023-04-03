@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore;
 using ScheduleWPF.Models;
+using ScheduleWPF.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -85,7 +87,7 @@ namespace ScheduleWPF.ViewModels
         [RelayCommand]
         protected virtual void SaveChanges()
         {
-            Helper.ThrowIf(!Helper.SaveChanges());
+            ThrowHelper.ThrowUnless<DbUpdateException>(Helper.SaveChanges());
         }
         [RelayCommand]
         protected virtual void CancelChanges()

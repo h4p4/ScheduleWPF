@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -21,10 +22,17 @@ namespace ScheduleWPF.ViewModels
         //private KeyValuePair<List<TEntity>, string> _selectedEntity;
         //private ObservableCollection<TEntity> _selectedEntityData;
         [ObservableProperty]
-        private ObservableCollection<TEntity> _selectedEntityData;
+        private BindableCollection<TEntity> _selectedEntityData;
+        [ObservableProperty]
+        private TEntity _selectedEntityInstance;
         public EditEntityViewModel() 
         {
             SelectedEntityData = new(Helper.GetContext<TEntity>());
+        }
+        [RelayCommand]
+        private void SaveChanges()
+        {
+            ThrowHelper.ThrowUnless<DbUpdateException>(Helper.SaveChanges(), "Не удалось сохранить изменения!");
         }
     }
 }

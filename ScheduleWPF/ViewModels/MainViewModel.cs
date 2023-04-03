@@ -195,7 +195,7 @@ namespace ScheduleWPF.ViewModels
         private void DeleteLecture()
         {
             Helper.GetContext().Lectures.Remove(SelectedLecture);
-            Helper.ThrowIf(!Helper.SaveChanges(), "Не удалось удалить лекцию.");
+            ThrowHelper.ThrowUnless<DbUpdateException>(Helper.SaveChanges(), "Не удалось удалить лекцию.");
             UpdateView();
         }
     }
