@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScheduleWPF.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,6 +26,18 @@ public partial class Time
         _defaultValue : 
         this.StartTime.ToString("H:mm") + " - " + this.EndTime.ToString("H:mm");
     [NotMapped]
-    public int DiffInMinutes => Convert.ToInt32(this.EndTime.ToTimeSpan().TotalMinutes -
-                                                this.StartTime.ToTimeSpan().TotalMinutes);
+    public LectureLength Length
+    {
+        get
+        {
+            var len =  Convert.ToInt32(this.EndTime.ToTimeSpan().TotalMinutes -
+                                       this.StartTime.ToTimeSpan().TotalMinutes);
+            if (len == (int)LectureLength.Long)
+                return LectureLength.Long;
+            if (len == (int)LectureLength.Short)
+                return LectureLength.Short;
+            return LectureLength.None;
+        }
+    }
+
 }

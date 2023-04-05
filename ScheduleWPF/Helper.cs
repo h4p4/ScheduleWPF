@@ -19,27 +19,25 @@ namespace ScheduleWPF
 {
     public static class Helper
     {
-        private static readonly ScheduleContext context = new ScheduleContext();
+        private static readonly ScheduleContext _context = new ScheduleContext();
         private static MainViewModel _mainViewModel;
         public static MainViewModel MainViewModel
         {
             get => _mainViewModel;
             set => _mainViewModel = value;
         }
-        public static ScheduleContext GetContext()
-        {
-            return context;
-        }
+
+        public static ScheduleContext Context => _context;
         public static List<TEntity> GetContext<TEntity>() where TEntity : class
         {
-            DbSet<TEntity> entities = context.Set<TEntity>();
+            DbSet<TEntity> entities = _context.Set<TEntity>();
             return entities.ToList();
         }
         public static bool SaveChanges()
         {
             try
             {
-                context.SaveChanges(true);
+                _context.SaveChanges(true);
             }
             catch (Exception)
             {
@@ -50,20 +48,20 @@ namespace ScheduleWPF
         public static void DeleteChanges(object? objectWithChanges)
         {
             if (objectWithChanges == null) return;
-            context.Entry(objectWithChanges).Reload();
-            context.Update(objectWithChanges);
+            _context.Entry(objectWithChanges).Reload();
+            _context.Update(objectWithChanges);
         }
         public static void Add<T>(T objectToAdd, ObservableCollection<T> collection)
         {
             collection.Add(objectToAdd);
-            context.Update(objectToAdd);
+            _context.Update(objectToAdd);
         }
         public static void AddRange<T>(List<T> deleteRange, ObservableCollection<T> collection)
         {
             foreach (var item in deleteRange)
             {
                 collection.Add(item);
-                context.Update(item);
+                _context.Update(item);
             }
         }
         public static bool ExecuteCommand(IRelayCommand? command)

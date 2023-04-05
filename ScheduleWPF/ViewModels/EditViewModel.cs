@@ -15,7 +15,7 @@ namespace ScheduleWPF.ViewModels
         {
             Lecture = lecture;
             if (lecture == null || lecture.Time == null) return;
-            SetIsShortDayWithoutUpdate(lecture.Time.DiffInMinutes == 60);
+            SetIsShortDayWithoutUpdate(lecture.Time.Length == Utilities.LectureLength.Short);
         }
     }
 }

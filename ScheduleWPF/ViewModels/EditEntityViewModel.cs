@@ -17,21 +17,17 @@ namespace ScheduleWPF.ViewModels
 {
     public partial class EditEntityViewModel<TEntity> : ObservableObject where TEntity : class
     {
-
-        //[ObservableProperty]
-        //private KeyValuePair<List<TEntity>, string> _selectedEntity;
-        //private ObservableCollection<TEntity> _selectedEntityData;
         [ObservableProperty]
         private BindableCollection<TEntity> _selectedEntityData;
         private TEntity _selectedEntityInstance;
         public TEntity SelectedEntityInstance
         {
-            get { return _selectedEntityInstance; }
+            get => _selectedEntityInstance; 
             set 
-            { 
-                if (value == null) return;
-                SetProperty(ref _selectedEntityInstance, value);
-                Helper.GetContext().Update(SelectedEntityInstance);
+            {
+                if (!SetProperty(ref _selectedEntityInstance, value)) return;
+                Helper.Context.ChangeTracker.Clear();
+                Helper.Context.Update(SelectedEntityInstance);
             }
         }
 

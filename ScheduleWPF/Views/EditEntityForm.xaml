@@ -28,6 +28,11 @@
                 <Setter Property="MinRowHeight" Value="40"/>
                 <Setter Property="HeadersVisibility" Value="Column"/>
             </Style>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MahApps.Styles.Button}">
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="Padding" Value="10 5"/>
+                <Setter Property="Margin" Value="0 10"/>
+            </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="70" Height="Auto"/>
@@ -42,7 +47,7 @@
                   ItemsSource="{Binding SelectedEntityData, UpdateSourceTrigger=PropertyChanged}" 
                   SelectedItem="{Binding SelectedEntityInstance, UpdateSourceTrigger=PropertyChanged}"
                   AutoGeneratingColumn="EditDGrid_AutoGeneratingColumn"/>
-        <Button Grid.Row="2" Content="Сохранить" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Command="{Binding SaveChangesCommand}" Width="150"/>
+        <Button Grid.Row="2" Content="Сохранить" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Command="{Binding SaveChangesCommand}" Width="Auto"/>
 
     </Grid>
 </Page>

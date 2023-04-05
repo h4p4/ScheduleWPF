@@ -135,14 +135,14 @@ namespace ScheduleWPF.ViewModels
         }
         private void InitGroups()
         {
-            _allGroups = new ObservableCollection<Group>(Helper.GetContext().Groups);
+            _allGroups = new ObservableCollection<Group>(Helper.Context.Groups);
             _allGroups.Insert(0, new Group { Title = "Выберите группу", Id = -1 });
             _selectedGroup = AllGroups.First();
         }
         private void InitLecturesPool()
         {
             _allLectures = new ObservableCollection<Lecture>(
-                                Helper.GetContext()
+                                Helper.Context
                                       .Lectures.Include(x => x.Subject)
                                       .Include(x => x.Group)
                                       .Include(x => x.Room)
@@ -194,7 +194,7 @@ namespace ScheduleWPF.ViewModels
         [RelayCommand]
         private void DeleteLecture()
         {
-            Helper.GetContext().Lectures.Remove(SelectedLecture);
+            Helper.Context.Lectures.Remove(SelectedLecture);
             ThrowHelper.ThrowUnless<DbUpdateException>(Helper.SaveChanges(), "Не удалось удалить лекцию.");
             UpdateView();
         }

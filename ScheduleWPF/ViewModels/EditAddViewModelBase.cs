@@ -16,9 +16,6 @@ namespace ScheduleWPF.ViewModels
 {
     public partial class EditAddViewModelBase : ObservableObject
     {
-        private const int FullLectureInMunutes = 95;
-        private const int ShortLectureInMunutes = 60;
-
         private Time? _time;
         private bool _isShortDay;
         private Time _defaultTime = new Time();
@@ -48,8 +45,6 @@ namespace ScheduleWPF.ViewModels
             }
         }
 
-        //public bool CanDispose { get; set; } = false;
-
         public bool IsShortDay
         {
             get { return _isShortDay; }
@@ -71,17 +66,17 @@ namespace ScheduleWPF.ViewModels
         {
             Helper.DeleteChanges(Lecture);
             _date = DateOnly.FromDateTime(DateTime.Now);
-            _roomList = new ObservableCollection<Room>(Helper.GetContext().Rooms);
-            _subjectList = new ObservableCollection<Subject>(Helper.GetContext().Subjects);
-            _allTimeList = new ObservableCollection<Time>(Helper.GetContext().Times);
-            _lecturerList = new ObservableCollection<Lecturer>(Helper.GetContext().Lecturers);
+            _roomList = new ObservableCollection<Room>(Helper.Context.Rooms);
+            _subjectList = new ObservableCollection<Subject>(Helper.Context.Subjects);
+            _allTimeList = new ObservableCollection<Time>(Helper.Context.Times);
+            _lecturerList = new ObservableCollection<Lecturer>(Helper.Context.Lecturers);
             Handle();
 
         }
         private void Handle()
         {
-            TimeList = new (IsShortDay ? _allTimeList.Where(x => x.DiffInMinutes == ShortLectureInMunutes) : 
-                                          _allTimeList.Where(x => x.DiffInMinutes == FullLectureInMunutes));
+            TimeList = new (IsShortDay ? _allTimeList.Where(x => x.Length == LectureLength.Short) : 
+                                          _allTimeList.Where(x => x.Length == LectureLength.Long));
         }
 
         [RelayCommand]
