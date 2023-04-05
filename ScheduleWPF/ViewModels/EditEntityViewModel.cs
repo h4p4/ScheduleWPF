@@ -23,8 +23,18 @@ namespace ScheduleWPF.ViewModels
         //private ObservableCollection<TEntity> _selectedEntityData;
         [ObservableProperty]
         private BindableCollection<TEntity> _selectedEntityData;
-        [ObservableProperty]
         private TEntity _selectedEntityInstance;
+        public TEntity SelectedEntityInstance
+        {
+            get { return _selectedEntityInstance; }
+            set 
+            { 
+                if (value == null) return;
+                SetProperty(ref _selectedEntityInstance, value);
+                Helper.GetContext().Update(SelectedEntityInstance);
+            }
+        }
+
         public EditEntityViewModel() 
         {
             SelectedEntityData = new(Helper.GetContext<TEntity>());

@@ -29,11 +29,9 @@ namespace ScheduleWPF.ViewModels
             _dateOnly = dateOnly;
             _group = group;
             Lecture = new();
-            Lecture.Id = -1;
         }
         protected override void SaveChanges()
         {
-            Lecture.Id = null;
             Lecture.Date = _dateOnly;
             Lecture.Group = _group;
             Helper.Add(Lecture, _lectures);
