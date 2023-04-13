@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.VisualBasic;
 using ScheduleWPF.Models;
 using ScheduleWPF.Utilities.DataTypes;
-using ScheduleWPF.Utilities.DataTypes.Collections;
-using ScheduleWPF.Utilities.DataTypes.Enums;
 using ScheduleWPF.Utilities.Helpers;
-using ScheduleWPF.Utilities.Extensions;
 using ScheduleWPF.Models.DataProviders;
 
 namespace ScheduleWPF.ViewModels

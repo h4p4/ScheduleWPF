@@ -1,12 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using ScheduleWPF.Models;
+﻿using ScheduleWPF.Models;
 using ScheduleWPF.Utilities.DataTypes.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
 
 namespace ScheduleWPF.ViewModels
 {

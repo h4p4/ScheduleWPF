@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ScheduleWPF.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScheduleWPF.Models.Interfaces
 {
