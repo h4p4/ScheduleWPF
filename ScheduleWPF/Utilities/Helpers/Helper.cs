@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using ScheduleWPF.Models;
 using ScheduleWPF.ViewModels;
 
-namespace ScheduleWPF
+namespace ScheduleWPF.Utilities.Helpers
 {
     public static class Helper
     {

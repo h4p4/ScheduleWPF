@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScheduleWPF.Utilities
+namespace ScheduleWPF.Utilities.Helpers
 {
     public static class ThrowHelper
     {
@@ -21,7 +21,7 @@ namespace ScheduleWPF.Utilities
                 throw;
             }
         }
-        public static void ThrowUnless<TException>(bool condition) 
+        public static void ThrowUnless<TException>(bool condition)
             where TException : Exception
         {
             Exception ex = (Exception)Activator.CreateInstance(typeof(TException));
@@ -56,7 +56,7 @@ namespace ScheduleWPF.Utilities
                 throw;
             }
         }
-        public static void ThrowIf<TException>(bool condition, string message) 
+        public static void ThrowIf<TException>(bool condition, string message)
             where TException : Exception
         {
             Exception ex = (Exception)Activator.CreateInstance(typeof(TException), message);
@@ -69,7 +69,7 @@ namespace ScheduleWPF.Utilities
                 throw;
             }
         }
-        public static void ThrowIf<TException>(bool condition) 
+        public static void ThrowIf<TException>(bool condition)
             where TException : Exception
         {
             Exception ex = (Exception)Activator.CreateInstance(typeof(TException));

@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using ScheduleWPF.Models;
-using ScheduleWPF.Utilities;
 using ScheduleWPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ScheduleWPF.Utilities.Extensions;
+
 
 namespace ScheduleWPF.Views
 {

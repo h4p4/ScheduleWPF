@@ -12,7 +12,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.VisualBasic;
 using ScheduleWPF.Models;
-using ScheduleWPF.Utilities;
+using ScheduleWPF.Utilities.DataTypes;
+using ScheduleWPF.Utilities.DataTypes.Collections;
+using ScheduleWPF.Utilities.DataTypes.Enums;
+using ScheduleWPF.Utilities.Helpers;
+using ScheduleWPF.Utilities.Extensions;
+using ScheduleWPF.Models.DataProviders;
 
 namespace ScheduleWPF.ViewModels
 {
@@ -80,8 +85,6 @@ namespace ScheduleWPF.ViewModels
             get { return _selectedYear; }
             set { SetProperty(ref _selectedYear, value); Handle(); }
         }
-        
-
         public MainViewModel()
         {
             InitializeData();

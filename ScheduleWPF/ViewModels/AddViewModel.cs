@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ScheduleWPF.Models;
-using ScheduleWPF.Utilities;
+using ScheduleWPF.Models.DataProviders;
+using ScheduleWPF.Utilities.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +16,6 @@ namespace ScheduleWPF.ViewModels
         private DateOnly _dateOnly;
         private Group _group;
         private ObservableCollection<Lecture> _lectures;
-
         [ObservableProperty] private Lecturer _lecturer;
         [ObservableProperty] private Room _room;
         [ObservableProperty] private Subject _subject;

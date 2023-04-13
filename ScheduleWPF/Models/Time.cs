@@ -1,4 +1,4 @@
-﻿using ScheduleWPF.Utilities;
+﻿using ScheduleWPF.Utilities.DataTypes.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

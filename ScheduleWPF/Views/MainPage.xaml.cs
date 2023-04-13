@@ -14,7 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
 using ScheduleWPF.Models;
-using ScheduleWPF.Utilities;
+using ScheduleWPF.Utilities.Helpers;
+using ScheduleWPF.Utilities.Extensions;
 using ScheduleWPF.ViewModels;
 
 namespace ScheduleWPF.Views

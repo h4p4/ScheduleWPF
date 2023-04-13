@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ScheduleWPF.Models;
+using ScheduleWPF.Utilities.DataTypes.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace ScheduleWPF.ViewModels
         {
             Lecture = lecture;
             if (lecture == null || lecture.Time == null) return;
-            SetIsShortDayWithoutUpdate(lecture.Time.Length == Utilities.LectureLength.Short);
+            SetIsShortDayWithoutUpdate(lecture.Time.Length == LectureLength.Short);
         }
     }
 }

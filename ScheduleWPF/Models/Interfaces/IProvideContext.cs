@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScheduleWPF.Utilities
+namespace ScheduleWPF.Models.Interfaces
 {
     public interface IProvideContext<TContext> where TContext : DbContext
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScheduleWPF.Utilities
+namespace ScheduleWPF.Utilities.DataTypes
 {
     public class DoubleDate
     {
@@ -25,6 +25,6 @@ namespace ScheduleWPF.Utilities
             get => FirstDate.ToString("m") + " - " + LastDate.ToString("m");
         }
         public bool IsInRange(DateOnly dateToCheck) => dateToCheck >= FirstDate && dateToCheck <= LastDate.AddDays(1);
-        
+
     }
 }

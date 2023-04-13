@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScheduleWPF.Utilities
+namespace ScheduleWPF.Utilities.DataTypes.Enums
 {
     public enum LectureLength : byte
     {

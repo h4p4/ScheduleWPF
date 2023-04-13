@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScheduleWPF.Utilities
+namespace ScheduleWPF.Utilities.Extensions
 {
     public static class IRelayCommandExtension
     {

@@ -2,7 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using ScheduleWPF.Models;
-using ScheduleWPF.Utilities;
+using ScheduleWPF.Models.DataProviders;
+using ScheduleWPF.Utilities.DataTypes.Enums;
+using ScheduleWPF.Utilities.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

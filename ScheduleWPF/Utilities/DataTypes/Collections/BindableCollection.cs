@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScheduleWPF.Utilities
+namespace ScheduleWPF.Utilities.DataTypes.Collections
 {
     public class BindableCollection<T> : ObservableCollection<T>, ITypedList
     {

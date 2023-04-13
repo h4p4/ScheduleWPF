@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ScheduleWPF.Models;
+using ScheduleWPF.Models.DataControllers;
+using ScheduleWPF.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScheduleWPF.Utilities
+namespace ScheduleWPF.Models.DataProviders
 {
     public class ContextProvider : IProvideContext<ScheduleContext>
     {

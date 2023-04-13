@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace ScheduleWPF.Models;
+namespace ScheduleWPF.Models.DataControllers;
 
 public partial class ScheduleContext : DbContext
 {
