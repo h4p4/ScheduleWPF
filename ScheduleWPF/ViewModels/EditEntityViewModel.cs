@@ -17,10 +17,9 @@ namespace ScheduleWPF.ViewModels
 {
     public partial class EditEntityViewModel<TEntity> : ObservableObject where TEntity : class
     {
-        [ObservableProperty]
-        private BindableCollection<TEntity> _selectedEntityData;
+        private readonly ContextProvider _contextProvider = new ContextProvider();
+        [ObservableProperty] private BindableCollection<TEntity> _selectedEntityData;
         private TEntity _selectedEntityInstance;
-        private readonly ScheduleContext _context = new ScheduleContext();
         public TEntity SelectedEntityInstance
         {
             get => _selectedEntityInstance; 
@@ -28,33 +27,19 @@ namespace ScheduleWPF.ViewModels
             {
                 if (value == null) return;
                 if (!SetProperty(ref _selectedEntityInstance, value)) return;
-                _context.Update(SelectedEntityInstance);
+                _contextProvider.Context.Update(SelectedEntityInstance);
                 
             }
         }
 
         public EditEntityViewModel() 
         {
-            SelectedEntityData = new(Helper.GetContext<TEntity>());
+            SelectedEntityData = new(_contextProvider.GetContext<TEntity>());
         }
-        [RelayCommand]
-        private void SaveChanges()
+        [RelayCommand] private void SaveChanges()
         {
 
-            ThrowHelper.ThrowUnless<DbUpdateException>(Save(), "Не удалось сохранить изменения!");
-            bool Save()
-            {
-                try
-                {
-                    _context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-
-                    return false;
-                }
-                return true;
-            }
+            ThrowHelper.ThrowUnless<DbUpdateException>(_contextProvider.TrySaveChanges(), "Не удалось сохранить изменения!");
         }
     }
 }

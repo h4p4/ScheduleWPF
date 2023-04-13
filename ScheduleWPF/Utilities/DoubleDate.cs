@@ -15,6 +15,11 @@ namespace ScheduleWPF.Utilities
             FirstDate = firstDate;
             LastDate = FirstDate.AddDays(5);
         }
+        public DoubleDate(DateOnly firstDate, DateOnly lastDate)
+        {
+            FirstDate = firstDate;
+            LastDate = lastDate;
+        }
         public string View
         {
             get => FirstDate.ToString("m") + " - " + LastDate.ToString("m");

@@ -26,44 +26,33 @@ namespace ScheduleWPF.ViewModels
         private ObservableCollection<string> _allYears;
         private ObservableCollection<DoubleDate> _doubleDates;
 
-        [ObservableProperty]
-        private bool _canAdd = false;
-        [ObservableProperty]
-        public ObservableCollection<ObservableCollection<Lecture>> _lectures;
-        [ObservableProperty]
-        private ObservableCollection<Lecture> _mondayLectures;
-        [ObservableProperty]
-        private ObservableCollection<Lecture> _tuesdayLectures;
-        [ObservableProperty]
-        private ObservableCollection<Lecture> _wednesdayLectures;
-        [ObservableProperty]
-        private ObservableCollection<Lecture> _thursdayLectures;
-        [ObservableProperty]
-        private ObservableCollection<Lecture> _fridayLectures;
-        [ObservableProperty]
-        private ObservableCollection<Lecture> _saturdayLectures;
-        [ObservableProperty]
-        private ObservableCollection<Group> _allGroups;
-        [ObservableProperty]
-        private ObservableCollection<DateOnly> _allDates;
-
+        [ObservableProperty] private bool _canAdd = false;
+        [ObservableProperty] private ObservableCollection<Lecture> _mondayLectures;
+        [ObservableProperty] private ObservableCollection<Lecture> _tuesdayLectures;
+        [ObservableProperty] private ObservableCollection<Lecture> _wednesdayLectures;
+        [ObservableProperty] private ObservableCollection<Lecture> _thursdayLectures;
+        [ObservableProperty] private ObservableCollection<Lecture> _fridayLectures;
+        [ObservableProperty] private ObservableCollection<Lecture> _saturdayLectures;
+        [ObservableProperty] private ObservableCollection<Group> _allGroups;
+        [ObservableProperty] private ObservableCollection<DateOnly> _allDates;
+        [ObservableProperty] public ObservableCollection<ObservableCollection<Lecture>> _lectures;
 
         private ObservableCollection<Lecture> _allLectures;
         public ObservableCollection<Lecture> AllLectures
         {
             get => _allLectures;
-            set { _allLectures = value; SetProperty(ref _allLectures, value); Handle(); }
+            set { SetProperty(ref _allLectures, value); Handle(); }
         }
 
         public ObservableCollection<DoubleDate> DoubleDates
         {
             get { return _doubleDates; }
-            set { _doubleDates = value; SetProperty(ref _doubleDates, value); }
+            set { SetProperty(ref _doubleDates, value); }
         }
         public ObservableCollection<string> AllYears
         {
             get { return _allYears; }
-            set { _allYears = value; SetProperty(ref _allYears, value); }
+            set { SetProperty(ref _allYears, value); }
         }
 
         public Group SelectedGroup
@@ -135,14 +124,14 @@ namespace ScheduleWPF.ViewModels
         }
         private void InitGroups()
         {
-            _allGroups = new ObservableCollection<Group>(Helper.Context.Groups);
+            _allGroups = new ObservableCollection<Group>(ContextProvider.GlobalContext.Groups);
             _allGroups.Insert(0, new Group { Title = "Выберите группу", Id = -1 });
             _selectedGroup = AllGroups.First();
         }
         private void InitLecturesPool()
         {
             _allLectures = new ObservableCollection<Lecture>(
-                                Helper.Context
+                                ContextProvider.GlobalContext
                                       .Lectures.Include(x => x.Subject)
                                       .Include(x => x.Group)
                                       .Include(x => x.Room)
@@ -194,8 +183,8 @@ namespace ScheduleWPF.ViewModels
         [RelayCommand]
         private void DeleteLecture()
         {
-            Helper.Context.Lectures.Remove(SelectedLecture);
-            ThrowHelper.ThrowUnless<DbUpdateException>(Helper.SaveChanges(), "Не удалось удалить лекцию.");
+            ContextProvider.GlobalContext.Lectures.Remove(SelectedLecture);
+            ThrowHelper.ThrowUnless<DbUpdateException>(ContextProvider.TrySaveChanges(), "Не удалось удалить лекцию.");
             UpdateView();
         }
     }

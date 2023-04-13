@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using ScheduleWPF.Models;
+using ScheduleWPF.Utilities;
 using ScheduleWPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace ScheduleWPF.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Helper.ExecuteCommand(EditAddViewModel.SaveChangesCommand))
+            if (EditAddViewModel.SaveChangesCommand.TryExecute())
             {
                 ExitPage();
                 return;
@@ -62,7 +63,7 @@ namespace ScheduleWPF.Views
         }
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteCommand(EditAddViewModel.CancelChangesCommand);
+            EditAddViewModel.CancelChangesCommand.TryExecute();
             ExitPage();
         }
         private void ShowErrorMessage(string message)

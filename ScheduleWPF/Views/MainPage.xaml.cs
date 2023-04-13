@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
 using ScheduleWPF.Models;
+using ScheduleWPF.Utilities;
 using ScheduleWPF.ViewModels;
 
 namespace ScheduleWPF.Views
@@ -118,11 +119,11 @@ namespace ScheduleWPF.Views
         {
             if (EditAddSubPage != null)
             {
-                var returnValue = Helper.ExecuteCommand(ViewModel.DeleteLectureCommand);
+                var returnValue = ViewModel.DeleteLectureCommand.TryExecute();
                 CloseForm();
                 return returnValue;
             }
-            return Helper.ExecuteCommand(ViewModel.DeleteLectureCommand);
+            return ViewModel.DeleteLectureCommand.TryExecute();
         }
         private void CloseForm()
         {

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ScheduleWPF.Models;
+using ScheduleWPF.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,14 +16,10 @@ namespace ScheduleWPF.ViewModels
         private Group _group;
         private ObservableCollection<Lecture> _lectures;
 
-        [ObservableProperty]
-        private Lecturer _lecturer;
-        [ObservableProperty]
-        private Room _room;
-        [ObservableProperty]
-        private Subject _subject;
-        [ObservableProperty]
-        private Time _time;
+        [ObservableProperty] private Lecturer _lecturer;
+        [ObservableProperty] private Room _room;
+        [ObservableProperty] private Subject _subject;
+        [ObservableProperty] private Time _time;
         public AddViewModel(DateOnly dateOnly, Group group) : base()
         {
             _lectures = Helper.MainViewModel.AllLectures;
@@ -34,7 +31,9 @@ namespace ScheduleWPF.ViewModels
         {
             Lecture.Date = _dateOnly;
             Lecture.Group = _group;
-            Helper.Add(Lecture, _lectures);
+            _lectures.Add(Lecture);
+            ContextProvider.GlobalContext.ChangeTracker.Clear();
+            ContextProvider.GlobalContext.Update(Lecture);
             base.SaveChanges();
             Helper.MainViewModel.UpdateView();
         }

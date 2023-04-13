@@ -5,6 +5,7 @@ using ScheduleWPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -45,10 +46,10 @@ namespace ScheduleWPF.Views
             string path = "ScheduleWPF.Models.";
             EditableEntities = new Dictionary<string, string>
             {
-                { path + nameof(Group) , "Группа" },
                 { path + nameof(Lecturer), "Преподаватель" },
-                { path + nameof(Room), "Аудитория" },
                 { path + nameof(Subject), "Предмет" },
+                { path + nameof(Group) , "Группа" },
+                { path + nameof(Room), "Аудитория" }
             };
             EditCBox.ItemsSource = EditableEntities;
             EditCBox.SelectedItem = EditableEntities.First();
