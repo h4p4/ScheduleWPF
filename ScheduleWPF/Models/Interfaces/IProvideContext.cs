@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ScheduleWPF.Models.DataControllers;
 using System;
 using System.Collections.Generic;
 
@@ -6,19 +7,11 @@ namespace ScheduleWPF.Models.Interfaces
 {
     public interface IProvideContext<TContext> where TContext : DbContext
     {
-        public static TContext Context { get; }
-        public static List<TEntity> GetContext<TEntity>() where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-        public static bool TrySaveChanges()
-        {
-            throw new NotImplementedException();
-        }
-        public static void CancelChanges(object? objectWithChanges)
-        {
-            throw new NotImplementedException();
-        }
+        public TContext Context { get; }
+        public List<TEntity> GetContext<TEntity>() where TEntity : ProvidableEntity;
+        public bool TryUpdateEntity<TEntity>(TEntity entity) where TEntity : ProvidableEntity;
+        public bool TrySaveChanges();
+        public void CancelChanges(object? objectWithChanges);
 
     }
 }

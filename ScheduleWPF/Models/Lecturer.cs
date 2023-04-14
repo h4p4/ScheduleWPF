@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using ScheduleWPF.Models.DataControllers;
+using ScheduleWPF.Models.Interfaces;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ScheduleWPF.Models;
 
-public partial class Lecturer
+public partial class Lecturer : ProvidableEntity
 {
     [Browsable(false)]
     public int Id { get; set; }

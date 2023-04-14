@@ -20,6 +20,7 @@ namespace ScheduleWPF.ViewModels
 
         private ObservableCollection<string> _allYears;
         private ObservableCollection<DoubleDate> _doubleDates;
+        private ObservableCollection<Lecture> _allLectures;
 
         [ObservableProperty] private bool _canAdd = false;
         [ObservableProperty] private ObservableCollection<Lecture> _mondayLectures;
@@ -32,7 +33,6 @@ namespace ScheduleWPF.ViewModels
         [ObservableProperty] private ObservableCollection<DateOnly> _allDates;
         [ObservableProperty] public ObservableCollection<ObservableCollection<Lecture>> _lectures;
 
-        private ObservableCollection<Lecture> _allLectures;
         public ObservableCollection<Lecture> AllLectures
         {
             get => _allLectures;

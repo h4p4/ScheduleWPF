@@ -9,48 +9,49 @@ namespace ScheduleWPF.Models.DataProviders
 {
     public class ContextProvider : IProvideContext<ScheduleContext>
     {
-        private static readonly ScheduleContext _globalContext;
-        private readonly ScheduleContext _context;
-        static ContextProvider()
-        {
-            _globalContext = new ScheduleContext();
-        }
+        private static ScheduleContext _context;
+
+        private static readonly ScheduleContext _globalContext = new ScheduleContext();
+        private readonly ScheduleContext _localContext;
+
+        public static ScheduleContext GlobalContext => _globalContext;
+        public ScheduleContext Context => _localContext;
+        
         public ContextProvider()
         {
             _context = new ScheduleContext();
         }
-        public static ScheduleContext GlobalContext => _globalContext;
-        public static List<TEntity> GetContext<TEntity>(object obj = null) where TEntity : class
+
+        public static List<TEntity> GetContext<TEntity>(ScheduleContext? context = null) where TEntity : ProvidableEntity
         {
-            DbSet<TEntity> entities = _globalContext.Set<TEntity>();
-            return entities.ToList();
-        }
-        public static bool TrySaveChanges(object obj = null)
-        {
-            try
-            {
-                _globalContext.SaveChanges(true);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
-        }
-        public static void CancelChanges(object? objectWithChanges, object obj = null)
-        {
-            if (objectWithChanges == null) return;
-            _globalContext.Entry(objectWithChanges).Reload();
-            _globalContext.Update(objectWithChanges);
-        }
-        public ScheduleContext Context => _context;
-        public List<TEntity> GetContext<TEntity>() where TEntity : class
-        {
+            SetContext(context);
             DbSet<TEntity> entities = _context.Set<TEntity>();
             return entities.ToList();
         }
-        public bool TrySaveChanges()
+
+        public List<TEntity> GetContext<TEntity>() where TEntity : ProvidableEntity => GetContext<TEntity>(this._localContext);
+
+        public static bool TryUpdateEntity<TEntity>(TEntity entity, ScheduleContext? context = null) where TEntity : ProvidableEntity
         {
+            SetContext(context);
+            bool result = true;
+            if (entity == null) result = false;
+            try
+            {
+                _context.Update(entity);
+            }
+            catch (System.InvalidOperationException)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        public bool TryUpdateEntity<TEntity>(TEntity entity) where TEntity : ProvidableEntity => TryUpdateEntity(entity, this._localContext);
+
+        public static bool TrySaveChanges(ScheduleContext? context = null)
+        {
+            SetContext(context);
             try
             {
                 _context.SaveChanges(true);
@@ -61,12 +62,28 @@ namespace ScheduleWPF.Models.DataProviders
             }
             return true;
         }
-        public void CancelChanges(object? objectWithChanges)
+
+        public bool TrySaveChanges() => TrySaveChanges(this._localContext);
+
+        public static void CancelChanges(object? objectWithChanges, ScheduleContext? context = null)
         {
+            SetContext(context);
             if (objectWithChanges == null) return;
             _context.Entry(objectWithChanges).Reload();
             _context.Update(objectWithChanges);
         }
 
+        public void CancelChanges(object? objectWithChanges) => CancelChanges(objectWithChanges, this._localContext);
+
+        private static void SetContext(ScheduleContext? context)
+        {
+            if (context == null)
+            {
+                _context = _globalContext;
+                return;
+            }
+            _context = context;
+        }
     }
 }
+

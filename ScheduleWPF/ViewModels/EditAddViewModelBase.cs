@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace ScheduleWPF.ViewModels
 {
-    public partial class EditAddViewModelBase : ObservableObject
+    public abstract partial class EditAddViewModelBase : ObservableObject
     {
         private Time? _time;
         private bool _isShortDay;
@@ -69,13 +69,11 @@ namespace ScheduleWPF.ViewModels
                                           _allTimeList.Where(x => x.Length == LectureLength.Long));
         }
 
-        [RelayCommand]
-        protected virtual void SaveChanges()
+        [RelayCommand] protected virtual void SaveChanges()
         {
             ThrowHelper.ThrowUnless<DbUpdateException>(ContextProvider.TrySaveChanges());
         }
-        [RelayCommand]
-        protected virtual void CancelChanges()
+        [RelayCommand] protected virtual void CancelChanges()
         {
             ContextProvider.CancelChanges(Lecture);
             Helper.MainViewModel.UpdateView();
